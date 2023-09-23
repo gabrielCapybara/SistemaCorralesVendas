@@ -1,5 +1,5 @@
 package bean;
-// Generated 16/09/2023 15:43:39 by Hibernate Tools 4.3.1
+// Generated 22/09/2023 19:21:59 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -25,16 +25,15 @@ public class GhsProdutos  implements java.io.Serializable {
      private int idghsProdutos;
      private String ghsNome;
      private String ghsDescricao;
-     private Double ghsPreco;
+     private double ghsPreco;
      private int ghsQuantidade;
-     private float ghsValorUnitario;
-     private Set ghsVendasProdutoses = new HashSet(0);
+     private double ghsValorUnitario;
 
     public GhsProdutos() {
     }
 
 	
-    public GhsProdutos(int idghsProdutos, String ghsNome, String ghsDescricao, Double ghsPreco, int ghsQuantidade, float ghsValorUnitario) {
+    public GhsProdutos(int idghsProdutos, String ghsNome, String ghsDescricao, double ghsPreco, int ghsQuantidade, double ghsValorUnitario) {
         this.idghsProdutos = idghsProdutos;
         this.ghsNome = ghsNome;
         this.ghsDescricao = ghsDescricao;
@@ -42,15 +41,8 @@ public class GhsProdutos  implements java.io.Serializable {
         this.ghsQuantidade = ghsQuantidade;
         this.ghsValorUnitario = ghsValorUnitario;
     }
-    public GhsProdutos(int idghsProdutos, String ghsNome, String ghsDescricao, Double ghsPreco, int ghsQuantidade, float ghsValorUnitario, Set ghsVendasProdutoses) {
-       this.idghsProdutos = idghsProdutos;
-       this.ghsNome = ghsNome;
-       this.ghsDescricao = ghsDescricao;
-       this.ghsPreco = ghsPreco;
-       this.ghsQuantidade = ghsQuantidade;
-       this.ghsValorUnitario = ghsValorUnitario;
-       this.ghsVendasProdutoses = ghsVendasProdutoses;
-    }
+   
+   
    
      @Id 
 
@@ -86,11 +78,11 @@ public class GhsProdutos  implements java.io.Serializable {
 
     
     @Column(name="ghs_preco", nullable=false, precision=7)
-    public Double getGhsPreco() {
+    public double getGhsPreco() {
         return this.ghsPreco;
     }
     
-    public void setGhsPreco(Double ghsPreco) {
+    public void setGhsPreco(double ghsPreco) {
         this.ghsPreco = ghsPreco;
     }
 
@@ -105,27 +97,13 @@ public class GhsProdutos  implements java.io.Serializable {
     }
 
     
-    @Column(name="ghs_valorUnitario", nullable=false, precision=12, scale=0)
-    public float getGhsValorUnitario() {
+    @Column(name="ghs_valorUnitario", nullable=false, precision=10)
+    public double getGhsValorUnitario() {
         return this.ghsValorUnitario;
     }
     
-    public void setGhsValorUnitario(float ghsValorUnitario) {
+    public void setGhsValorUnitario(double ghsValorUnitario) {
         this.ghsValorUnitario = ghsValorUnitario;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="ghsProdutos")
-    public Set getGhsVendasProdutoses() {
-        return this.ghsVendasProdutoses;
-    }
-    
-    public void setGhsVendasProdutoses(Set ghsVendasProdutoses) {
-        this.ghsVendasProdutoses = ghsVendasProdutoses;
-    }
-
-
-
-
 }
-
-

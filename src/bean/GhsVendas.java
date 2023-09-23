@@ -1,5 +1,5 @@
 package bean;
-// Generated 16/09/2023 15:43:39 by Hibernate Tools 4.3.1
+// Generated 22/09/2023 19:21:59 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -26,30 +26,22 @@ public class GhsVendas  implements java.io.Serializable {
 
 
      private int idghsVendas;
-     private Double ghsValorTotal;
+     private double ghsValorTotal;
      private Date ghsDataVenda;
      private String ghsFormaPagamento;
      private String ghsStatusVenda;
-     private Set ghsVendasProdutoses = new HashSet(0);
+
 
     public GhsVendas() {
     }
 
 	
-    public GhsVendas(int idghsVendas, Double ghsValorTotal, Date ghsDataVenda, String ghsFormaPagamento, String ghsStatusVenda) {
+    public GhsVendas(int idghsVendas, double ghsValorTotal, Date ghsDataVenda, String ghsFormaPagamento, String ghsStatusVenda) {
         this.idghsVendas = idghsVendas;
         this.ghsValorTotal = ghsValorTotal;
         this.ghsDataVenda = ghsDataVenda;
         this.ghsFormaPagamento = ghsFormaPagamento;
         this.ghsStatusVenda = ghsStatusVenda;
-    }
-    public GhsVendas(int idghsVendas, Double ghsValorTotal, Date ghsDataVenda, String ghsFormaPagamento, String ghsStatusVenda, Set ghsVendasProdutoses) {
-       this.idghsVendas = idghsVendas;
-       this.ghsValorTotal = ghsValorTotal;
-       this.ghsDataVenda = ghsDataVenda;
-       this.ghsFormaPagamento = ghsFormaPagamento;
-       this.ghsStatusVenda = ghsStatusVenda;
-       this.ghsVendasProdutoses = ghsVendasProdutoses;
     }
    
      @Id 
@@ -66,11 +58,11 @@ public class GhsVendas  implements java.io.Serializable {
 
     
     @Column(name="ghs_valorTotal", nullable=false, precision=10)
-    public Double getGhsValorTotal() {
+    public double getGhsValorTotal() {
         return this.ghsValorTotal;
     }
     
-    public void setGhsValorTotal(Double ghsValorTotal) {
+    public void setGhsValorTotal(double ghsValorTotal) {
         this.ghsValorTotal = ghsValorTotal;
     }
 
@@ -102,15 +94,6 @@ public class GhsVendas  implements java.io.Serializable {
     
     public void setGhsStatusVenda(String ghsStatusVenda) {
         this.ghsStatusVenda = ghsStatusVenda;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="ghsVendas")
-    public Set getGhsVendasProdutoses() {
-        return this.ghsVendasProdutoses;
-    }
-    
-    public void setGhsVendasProdutoses(Set ghsVendasProdutoses) {
-        this.ghsVendasProdutoses = ghsVendasProdutoses;
     }
 
 

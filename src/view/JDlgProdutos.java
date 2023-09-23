@@ -5,6 +5,11 @@
  */
 package view;
 
+import bean.GhsProdutos;
+import dao.GhsProdutos_DAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import tools.Util;
 
 /**
@@ -13,6 +18,11 @@ import tools.Util;
  */
 public class JDlgProdutos extends javax.swing.JDialog {
 
+    GhsProdutos ghsProdutos;
+     JDlgProdutosNovoIA jDlgProdutosNovoIA;
+     ProdutosControle produtosControle;
+     GhsProdutos_DAO ghsProdutos_DAO;
+    
     /**
      * Creates new form JDlgProdutos
      */
@@ -21,8 +31,13 @@ public class JDlgProdutos extends javax.swing.JDialog {
         setTitle("Tela de Produtos");
         initComponents();
         setLocationRelativeTo(null);
-    }
 
+        ProdutosControle produtosControle = new ProdutosControle();
+        ghsProdutos_DAO = new GhsProdutos_DAO();
+        List lista = ghsProdutos_DAO.listAll();
+        produtosControle.setList(lista);
+        jTable1.setModel(produtosControle);
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +56,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -49,7 +65,7 @@ public class JDlgProdutos extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "NOME", "PREÇO", "QUANTIDADE", "VALOR_UNI"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -102,20 +118,27 @@ public class JDlgProdutos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        // TODO add your handling code here:
-        JDlgProdutosNovoIA jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null, true);
+        // TODO add your handling code here:  
         jDlgProdutosNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        JDlgProdutosNovoIA jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null, true);
         jDlgProdutosNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-       if (Util.perguntar("Desejas excluir o registro") == true){}
+      if (Util.perguntar("Deseja excluir o usuario?") == true){
+           int sel = jTable1.getSelectedRow();
+           ghsProdutos = produtosControle.getBean(sel);
+          ghsProdutos_DAO.delete(ghsProdutos);
+           //atulizar lista no jtable
+           List lista = ghsProdutos_DAO.listAll();
+           produtosControle.setList(lista);
+        } else{
+           Util.mensagem("Exclusão cancelada");
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     /**

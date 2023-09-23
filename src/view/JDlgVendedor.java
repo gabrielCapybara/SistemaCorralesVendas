@@ -5,6 +5,9 @@
  */
 package view;
 
+import bean.GhsVendedor;
+import dao.GhsVendedor_DAO;
+import java.util.List;
 import tools.Util;
 
 /**
@@ -13,6 +16,11 @@ import tools.Util;
  */
 public class JDlgVendedor extends javax.swing.JDialog {
 
+     GhsVendedor ghsVendedor;
+     JDlgVendedorNovoIA jDlgVendedorNovoIA;
+     VendedorControle vendedorControle;
+     GhsVendedor_DAO ghsVendedor_DAO;
+    
     /**
      * Creates new form JDlgVendedor
      */
@@ -21,6 +29,17 @@ public class JDlgVendedor extends javax.swing.JDialog {
         setTitle("Tela de Vendedor");
         initComponents();
         setLocationRelativeTo(null);
+        
+        jDlgVendedorNovoIA = new JDlgVendedorNovoIA(null, true);
+      
+        setTitle("Cadastro de Usuários");
+        setLocationRelativeTo(null);
+        
+        VendedorControle vendedorControle = new VendedorControle();
+        ghsVendedor_DAO = new GhsVendedor_DAO();
+        List lista = ghsVendedor_DAO.listAll();
+        vendedorControle.setList(lista);
+        jTable1.setModel(vendedorControle);
     }
 
     /**
@@ -41,6 +60,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -49,7 +69,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "NOME", "EMAIL", "CPF", "DATA"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -103,20 +123,28 @@ public class JDlgVendedor extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        JDlgVendedorNovoIA jDlgVendedorNovoIA = new JDlgVendedorNovoIA(null, true);
-        jDlgVendedorNovoIA.setVisible(true);
+         jDlgVendedorNovoIA.setTitle("Alteração");
+       jDlgVendedorNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        JDlgVendedorNovoIA jDlgVendedorNovoIA = new JDlgVendedorNovoIA(null, true);
-        jDlgVendedorNovoIA.setVisible(true);
+ jDlgVendedorNovoIA.setTitle("Alteração");
+       jDlgVendedorNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Desejas excluir o registro") == true){}
-        
+        if (Util.perguntar("Deseja excluir o usuario?") == true){
+           int sel = jTable1.getSelectedRow();
+           ghsVendedor = vendedorControle.getBean(sel);
+           ghsVendedor_DAO.delete(ghsVendedor);
+           //atulizar lista no jtable
+           List lista = ghsVendedor_DAO.listAll();
+           vendedorControle.setList(lista);
+        } else{
+           Util.mensagem("Exclusão cancelada");
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     /**

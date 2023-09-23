@@ -8,6 +8,7 @@ package view;
 import bean.GhsUsuarios;
 import dao.GhsUsuarios_DAO;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,6 +28,9 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     //variável global é definida quando declaramos uma variável fora de qualquer função
     
     MaskFormatter mascaraCPF, mascaraDataNascimento;
+
+    public GhsUsuarios ghsUsuarios;
+    public GhsUsuarios_DAO ghsUsuarios_DAO;
     
     /**
      * Creates new form JDlgUsuarios
@@ -52,6 +56,45 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         
     }
 
+    public GhsUsuarios viewBean(){
+        GhsUsuarios ghsUsuarios = new GhsUsuarios();
+        
+        ghsUsuarios.setIdgbsUsuarios( Util.strInt(idgbs_usuarios.getText()));
+        ghsUsuarios.setGbsDataNascimento( Util.strDate(gbs_dataNascimento.getText()));
+        ghsUsuarios.setGbsNome(gbs_nome.getText());
+        ghsUsuarios.setGbsCpf(gbs_cpf.getText());
+        ghsUsuarios.setGbsApelido(gbs_apelido.getText());
+       ghsUsuarios.setGbsSenha(gbs_senha.getText());
+       ghsUsuarios.setGbsAtivo(gbs_ativo.getText());
+       ghsUsuarios.setGbsNivel(gbs_nivel.getSelectedIndex());
+       if (gbs_ativo.isSelected()== true) {
+            ghsUsuarios.setGbsAtivo("S");
+        } else {
+            ghsUsuarios.setGbsAtivo("N");
+        }
+       
+      
+        
+        return ghsUsuarios;
+     }
+     
+     public void beanView(GhsUsuarios ghsUsuarios) {
+        idgbs_usuarios.setText( Util.intStr(ghsUsuarios.getIdgbsUsuarios()));
+        gbs_nome.setText(ghsUsuarios.getGbsNome());
+        gbs_cpf.setText(ghsUsuarios.getGbsCpf());
+        gbs_apelido.setText(ghsUsuarios.getGbsApelido());
+        gbs_senha.setText(ghsUsuarios.getGbsSenha());
+        gbs_cpf.setText(ghsUsuarios.getGbsCpf());
+        gbs_dataNascimento.setText( Util.Datestr(ghsUsuarios.getGbsDataNascimento()));
+        gbs_nivel.setSelectedIndex(ghsUsuarios.getGbsNivel());
+        if ( ghsUsuarios.getGbsAtivo().equals("S") == true){
+          gbs_ativo.setSelected(true);
+        } else {
+        gbs_ativo.setSelected(false);    
+        }
+
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -289,6 +332,14 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+        ghsUsuarios = viewBean();
+        if (incluindo ==true ){
+        ghsUsuarios_DAO.insert(ghsUsuarios);}
+        else{
+               ghsUsuarios_DAO.update(ghsUsuarios);
+                }
+           Util.habilitar(false);
+        Util.limparCampos(idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void gbs_dataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gbs_dataNascimentoActionPerformed
@@ -296,7 +347,10 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_gbs_dataNascimentoActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-       
+       JDlgUsuarioPesquisa jDlgUsuarioPesquisa = new JDlgUsuarioPesquisa(null, true);
+        jDlgUsuarioPesquisa.setTelaAnterior(this);
+        jDlgUsuarioPesquisa.setVisible(true);
+        
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void gbs_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gbs_senhaActionPerformed
@@ -323,11 +377,13 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private void jBtbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbExcluirActionPerformed
         // TODO add your handling code here:
         if (Util.perguntar("Deseja excluir o registro?") == true) {
-
-        } else {
-            Util.mensagem("Exclusão cancelada");
-        }
-
+                GhsUsuarios ghsUsuarios = viewBean();
+                ghsUsuarios_DAO.delete(ghsUsuarios);
+          
+            } else {
+                Util.mensagem("Exclusão cancelada");
+            }
+            
         Util.limparCampos(idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
 
     }//GEN-LAST:event_jBtbExcluirActionPerformed

@@ -5,12 +5,26 @@
  */
 package view;
 
+import bean.GhsVendedor;
+import dao.GhsVendedor_DAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import tools.Util;
+
+
 /**
  *
  * @author TSUIIKUII
  */
 public class JDlgVendedorNovoIA extends javax.swing.JDialog {
 
+    MaskFormatter mascaraCPF, mascaraDataNascimento, mascaraTelefone;
+    GhsVendedor_DAO ghsVendedor_DAO;
+    GhsVendedor ghsVendedor;
     /**
      * Creates new form JDlgVendedorNovoIA
      */
@@ -19,8 +33,39 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
         setTitle("Tela de Vendedor Incluindo e Alterando");
         initComponents();
         setLocationRelativeTo(null);
+    try {
+            mascaraCPF = new MaskFormatter("###.###.###-##");
+            mascaraDataNascimento = new MaskFormatter("##/##/####");
+            mascaraTelefone = new MaskFormatter("(##)#####-####");
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendedorNovoIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ghs_cpf.setFormatterFactory( new DefaultFormatterFactory( mascaraCPF )); 
+        ghs_dataNascimento.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNascimento));
+        ghs_telefone.setFormatterFactory( new DefaultFormatterFactory( mascaraTelefone )); 
     }
 
+     public GhsVendedor viewBean(){
+        ghsVendedor.setIdghsVendedor( Util.strInt(idghs_vendedor.getText()));
+        ghsVendedor.setGhsDataNascimento( Util.strDate(ghs_dataNascimento.getText()));
+        ghsVendedor.setGhsNome(ghs_nome.getText());
+        ghsVendedor.setGhsCpf(ghs_cpf.getText());
+        ghsVendedor.setGhsEmail(ghs_email.getText());
+       ghsVendedor.setGhsTelefone(ghs_telefone.getText());
+      
+        
+        return ghsVendedor;
+     }
+     
+     public void beanView(GhsVendedor ghsVendedor) {
+        idghs_vendedor.setText( Util.intStr(ghsVendedor.getIdghsVendedor()));
+        ghs_nome.setText(ghsVendedor.getGhsNome());
+        ghs_cpf.setText(ghsVendedor.getGhsCpf());
+        ghs_email.setText(ghsVendedor.getGhsEmail());
+        ghs_telefone.setText(ghsVendedor.getGhsTelefone());
+        ghs_dataNascimento.setText( Util.Datestr(ghsVendedor.getGhsDataNascimento()));
+
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,6 +219,17 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
     private void jBtnOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
+      //  ghsVendedor = viewBean();
+       // ghsVendedor_DAO.insert(ghsVendedor);
+       
+        GhsVendedor ghsVendedor = viewBean();
+
+        GhsVendedor_DAO ghsVendedor_DAO = new GhsVendedor_DAO();
+
+        ghsVendedor_DAO.insert(ghsVendedor);        
+        
+        
+       // setVisible(false);  
     }//GEN-LAST:event_jBtnOk1ActionPerformed
 
     private void jBtnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar1ActionPerformed

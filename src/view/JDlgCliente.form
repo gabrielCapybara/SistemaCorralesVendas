@@ -96,7 +96,7 @@
                           <Component id="gbs_cidade" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
                           <Component id="gbs_bairro" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFmtCep" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="ghs_cep" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
                           <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -190,7 +190,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="gbs_endereco" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFmtCep" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ghs_cep" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -210,7 +210,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JFormattedTextField" name="jFmtCep">
+    <Component class="javax.swing.JFormattedTextField" name="ghs_cep">
     </Component>
     <Component class="javax.swing.JTextField" name="gbs_endereco">
     </Component>
