@@ -30,7 +30,6 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
      */
     public JDlgVendedorNovoIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setTitle("Tela de Vendedor Incluindo e Alterando");
         initComponents();
         setLocationRelativeTo(null);
     try {
@@ -46,6 +45,8 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
     }
 
      public GhsVendedor viewBean(){
+         GhsVendedor ghsVendedor = new GhsVendedor();
+         
         ghsVendedor.setIdghsVendedor( Util.strInt(idghs_vendedor.getText()));
         ghsVendedor.setGhsDataNascimento( Util.strDate(ghs_dataNascimento.getText()));
         ghsVendedor.setGhsNome(ghs_nome.getText());

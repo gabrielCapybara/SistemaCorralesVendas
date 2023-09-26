@@ -37,10 +37,9 @@ public class JDlgCliente extends javax.swing.JDialog {
         setTitle("Tela de Cliente");
         initComponents();
         setLocationRelativeTo(null);
-        Util.habilitar(false, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        
-        setTitle("Cadastro de usuários");
+        Util.habilitar(false, jBtnConfirmar, jBtnCancelar, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(true, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
+     
         setLocationRelativeTo(null);
          try {
              mascaraCPF = new MaskFormatter("###.###.###-##");
@@ -401,7 +400,7 @@ public class JDlgCliente extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(true, jBtnConfirmar, jBtnCancelar, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         incluindo = true;
 

@@ -24,7 +24,7 @@ public class JDlgClientePesquisa extends javax.swing.JDialog {
     public JDlgClientePesquisa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Pesquisar de Clientes");
+        setTitle("Registro de Clientes");
         setLocationRelativeTo(null);
         clienteControle  = new ClienteControle();
         GhsCliente_DAO clientes_DAO = new GhsCliente_DAO();

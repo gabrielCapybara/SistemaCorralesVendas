@@ -80,7 +80,7 @@ public void setList(List lista){
             return "Senha";
         }
         
-        return null;
+        return "";
         
     }
 

@@ -19,7 +19,9 @@ import tools.Util;
 public class JDlgProdutos extends javax.swing.JDialog {
 
     GhsProdutos ghsProdutos;
-     JDlgProdutosNovoIA jDlgProdutosNovoIA;
+    
+    JDlgProdutosNovoIA jDlgProdutosNovoIA;
+   
      ProdutosControle produtosControle;
      GhsProdutos_DAO ghsProdutos_DAO;
     
@@ -32,11 +34,13 @@ public class JDlgProdutos extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
 
-        ProdutosControle produtosControle = new ProdutosControle();
-        ghsProdutos_DAO = new GhsProdutos_DAO();
-        List lista = ghsProdutos_DAO.listAll();
-        produtosControle.setList(lista);
-        jTable1.setModel(produtosControle);
+        jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null, true);
+
+    ProdutosControle produtosControle = new ProdutosControle();
+    ghsProdutos_DAO = new GhsProdutos_DAO();
+    List lista = ghsProdutos_DAO.listAll();
+    produtosControle.setList(lista);
+    jTable1.setModel(produtosControle);
      }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,11 +123,13 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:  
+        jDlgProdutosNovoIA.setTitle("Incluindo");
         jDlgProdutosNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        jDlgProdutosNovoIA.setTitle("Alteração");
         jDlgProdutosNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 

@@ -40,7 +40,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         initComponents();
         
         Util.habilitar(false, idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtbExcluir, jBtnPesquisar);
+        Util.habilitar(true, jBtnIncluir, jBtbExcluir, jBtnAlterar, jBtnPesquisar);
         
         setTitle("Cadastro de usuários");
         setLocationRelativeTo(null);
@@ -85,6 +85,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         gbs_apelido.setText(ghsUsuarios.getGbsApelido());
         gbs_senha.setText(ghsUsuarios.getGbsSenha());
         gbs_cpf.setText(ghsUsuarios.getGbsCpf());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         gbs_dataNascimento.setText( Util.Datestr(ghsUsuarios.getGbsDataNascimento()));
         gbs_nivel.setSelectedIndex(ghsUsuarios.getGbsNivel());
         if ( ghsUsuarios.getGbsAtivo().equals("S") == true){
@@ -338,7 +339,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         else{
                ghsUsuarios_DAO.update(ghsUsuarios);
                 }
-           Util.habilitar(false);
+           Util.habilitar(true, jBtnAlterar, jBtnIncluir, jBtnPesquisar );
         Util.limparCampos(idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
@@ -350,7 +351,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
        JDlgUsuarioPesquisa jDlgUsuarioPesquisa = new JDlgUsuarioPesquisa(null, true);
         jDlgUsuarioPesquisa.setTelaAnterior(this);
         jDlgUsuarioPesquisa.setVisible(true);
-        
+        Util.habilitar(true, jBtnAlterar, jBtnCancelar, jBtbExcluir, jBtnIncluir);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void gbs_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gbs_senhaActionPerformed
@@ -377,7 +378,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private void jBtbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbExcluirActionPerformed
         // TODO add your handling code here:
         if (Util.perguntar("Deseja excluir o registro?") == true) {
-                GhsUsuarios ghsUsuarios = viewBean();
+                ghsUsuarios = viewBean();
                 ghsUsuarios_DAO.delete(ghsUsuarios);
           
             } else {

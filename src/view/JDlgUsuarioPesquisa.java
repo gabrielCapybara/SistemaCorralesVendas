@@ -24,7 +24,7 @@ public class JDlgUsuarioPesquisa extends javax.swing.JDialog {
     public JDlgUsuarioPesquisa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Pesquisar de Usuarios");
+        setTitle("Registro de Usuarios");
         setLocationRelativeTo(null);
         usuarioControle = new UsuarioControle();
         GhsUsuarios_DAO usuario_DAO = new GhsUsuarios_DAO();
@@ -89,7 +89,7 @@ public class JDlgUsuarioPesquisa extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBtnOk)

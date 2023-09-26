@@ -78,7 +78,7 @@ public class ClienteControle extends AbstractTableModel {
             return "E-MAIL";
         }
         
-        return null;
+        return "";
         
     }
 }

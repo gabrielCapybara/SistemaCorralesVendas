@@ -32,7 +32,6 @@ public class JDlgVendedor extends javax.swing.JDialog {
         
         jDlgVendedorNovoIA = new JDlgVendedorNovoIA(null, true);
       
-        setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
         
         VendedorControle vendedorControle = new VendedorControle();
@@ -123,7 +122,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-         jDlgVendedorNovoIA.setTitle("Alteração");
+         jDlgVendedorNovoIA.setTitle("Incluindo");
        jDlgVendedorNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
@@ -135,16 +134,19 @@ public class JDlgVendedor extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o usuario?") == true){
+        GhsVendedor ghsVendedorExcluir = new GhsVendedor();
+        
+       if (Util.perguntar("Deseja excluir o registro") == true){
            int sel = jTable1.getSelectedRow();
-           ghsVendedor = vendedorControle.getBean(sel);
-           ghsVendedor_DAO.delete(ghsVendedor);
-           //atulizar lista no jtable
+           ghsVendedorExcluir = vendedorControle.getBean(sel);
+           ghsVendedor_DAO.delete(ghsVendedorExcluir);
+
            List lista = ghsVendedor_DAO.listAll();
            vendedorControle.setList(lista);
         } else{
            Util.mensagem("Exclusão cancelada");
         }
+
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     /**

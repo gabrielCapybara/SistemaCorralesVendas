@@ -7,8 +7,10 @@ package dao;
 
 
 import bean.GhsVendedor;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -19,27 +21,29 @@ public class GhsVendedor_DAO extends DAO_Abstract{
 
     @Override
     public void insert(Object object) {
-       session.beginTransaction();
-      session.save(object);
-      session.beginTransaction().commit();
+      
+        Transaction transaction = session.beginTransaction();
+        session.save(object);
+        session.getTransaction().commit();
+        
     }
 
     @Override
     public void update(Object object) {
-        session.beginTransaction();
+      session.beginTransaction();
       session.flush();
       session.clear();
       session.update(object);
-      session.beginTransaction().commit();
+      session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-         session.beginTransaction();
-          session.flush();
+      session.beginTransaction();
+      session.flush();
       session.clear();
       session.delete(object);
-      session.beginTransaction().commit();
+      session.getTransaction().commit();
     }
     
 
@@ -47,7 +51,7 @@ public class GhsVendedor_DAO extends DAO_Abstract{
     public Object list(int id) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(GhsVendedor.class);
-        criteria.add(Restrictions.eq("drfIdcompraProduto", id));
+        criteria.add(Restrictions.eq("idghsVendedor", id));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -59,5 +63,5 @@ public class GhsVendedor_DAO extends DAO_Abstract{
         Criteria criteria = session.createCriteria(GhsVendedor.class);
          List lista = criteria.list();
         session.getTransaction().commit();
-        return lista;
+        return (ArrayList) lista;
 }}

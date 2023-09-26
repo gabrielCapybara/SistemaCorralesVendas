@@ -49,12 +49,9 @@ public class Util {
       
          int resp = JOptionPane.showConfirmDialog(null, cadeia,
                 "Perguntar", JOptionPane.YES_NO_OPTION);
-        if (resp == JOptionPane.YES_OPTION) {
-            return true;
-        } else {
-            return false;
+         return  resp == JOptionPane.YES_NO_OPTION;
         }
-       }
+       
        
        public static int strInt (String cad){
        return Integer.valueOf(cad);
@@ -73,15 +70,14 @@ public class Util {
        }
        
        public static Date strDate (String cad){
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+          SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {
             return formato.parse(cad);
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
-        }
        }
-       
+       }
        public static String Datestr (Date date){
          SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         return formato.format(date);

@@ -31,8 +31,9 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
     public JDlgProdutosNovoIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Inclusão");
         setLocationRelativeTo(null);
+        
+   
      try {
             mascaraPreco = new MaskFormatter("#######,##");
             mascaraValorUni = new MaskFormatter("##########,##");
