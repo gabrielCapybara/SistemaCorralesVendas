@@ -5,6 +5,8 @@
  */
 package view;
 
+import bean.GhsUsuarios;
+import dao.GhsUsuarios_DAO;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class JFrmTelaLogin extends javax.swing.JFrame {
 
+   
+    GhsUsuarios_DAO dao;
     /**
      * Creates new form JFrmTelaLogin
      */
@@ -20,6 +24,7 @@ public class JFrmTelaLogin extends javax.swing.JFrame {
         initComponents();
         setTitle("Tela de Login");
         setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -125,7 +130,14 @@ public class JFrmTelaLogin extends javax.swing.JFrame {
 
     private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
         // TODO add your handling code here:
-       if(jTxtUsuario.getText().equals("corrales") && jPwfSenha.getText().equals("123") || jTxtUsuario.getText().equals("sistema de vendas") && jPwfSenha.getText().equals("321")){
+        
+        String usuarios = jTxtUsuario.getText();
+        String senha = jPwfSenha.getText();
+        
+        GhsUsuarios_DAO dao = new GhsUsuarios_DAO();
+        GhsUsuarios usuarioAprovado = dao.login(usuarios, senha);
+        
+     if(usuarioAprovado != null){
             JOptionPane.showMessageDialog(null, "Acesso Permitido!!!");
             JFrmTelaPrincipal jFrmTelaPrincipal = new JFrmTelaPrincipal();
             jFrmTelaPrincipal.setVisible(true);

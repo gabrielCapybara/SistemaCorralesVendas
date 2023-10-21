@@ -57,11 +57,9 @@ public class GhsCliente_DAO extends DAO_Abstract {
 
     @Override
     public List listAll() {
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(GhsCliente.class);
-        List lista = criteria.list();
-        session.getTransaction().commit();
-        return (ArrayList) lista;
+    Criteria criteria = session.createCriteria(GhsCliente.class);
+    List lista = criteria.list();
+    return lista;
     }
 
 }

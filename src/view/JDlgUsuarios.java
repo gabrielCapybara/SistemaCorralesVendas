@@ -39,6 +39,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        ghsUsuarios_DAO = new GhsUsuarios_DAO();
+        
         Util.habilitar(false, idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
         Util.habilitar(true, jBtnIncluir, jBtbExcluir, jBtnAlterar, jBtnPesquisar);
         
@@ -391,7 +393,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true);
+        Util.habilitar(true, idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha, jBtnConfirmar, jBtnCancelar);
         incluindo = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -401,9 +403,11 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false);
+        
         Util.mensagem("Cancelamento concluido");
         Util.limparCampos(idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
+        Util.habilitar(false, idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtbExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void gbs_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gbs_nomeActionPerformed

@@ -106,7 +106,7 @@ public class GhsCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="gbs_rg", nullable=false, length=10)
+    @Column(name="gbs_rg", nullable=false, length=13)
     public String getGbsRg() {
         return this.gbsRg;
     }
@@ -176,7 +176,7 @@ public class GhsCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="gbs_telefoneResidencial", length=10)
+    @Column(name="gbs_telefoneResidencial", length=12)
     public String getGbsTelefoneResidencial() {
         return this.gbsTelefoneResidencial;
     }

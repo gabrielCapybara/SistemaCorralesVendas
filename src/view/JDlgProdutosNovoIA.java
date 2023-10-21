@@ -34,28 +34,29 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         
    
-     try {
-            mascaraPreco = new MaskFormatter("#######,##");
-            mascaraValorUni = new MaskFormatter("##########,##");
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgVendedorNovoIA.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         ghs_preco.setFormatterFactory( new DefaultFormatterFactory( mascaraPreco )); 
-        ghs_valorUnitario.setFormatterFactory(new DefaultFormatterFactory(mascaraValorUni));
+ //    try {
+  //          mascaraPreco = new MaskFormatter("########.##");
+  //          mascaraValorUni = new MaskFormatter("########.##");
+ //       } catch (ParseException ex) {
+  //          Logger.getLogger(JDlgVendedorNovoIA.class.getName()).log(Level.SEVERE, null, ex);
+  //      }
+  //       ghs_preco.setFormatterFactory( new DefaultFormatterFactory( mascaraPreco )); 
+  //      ghs_valorUnitario.setFormatterFactory(new DefaultFormatterFactory(mascaraValorUni));
     }
         public GhsProdutos viewBean(){
-        GhsProdutos ghsProdutos = new GhsProdutos();    
+     
+       GhsProdutos ghsProdutos = new GhsProdutos();    
             
-        ghsProdutos.setIdghsProdutos( Util.strInt(idghs_produtos.getText()));
-        ghsProdutos.setGhsNome(ghs_nome.getText());
-        ghsProdutos.setGhsDescricao(ghs_descricao.getText());
-        ghsProdutos.setGhsQuantidade( Util.strInt(ghs_quantidade.getText()));
-        ghs_valorUnitario.setText( Util.doubleStr(ghsProdutos.getGhsValorUnitario()));
-        ghs_preco.setText( Util.doubleStr(ghsProdutos.getGhsPreco()));
-      
+       ghsProdutos.setIdghsProdutos( Util.strInt(idghs_produtos.getText()));
+       ghsProdutos.setGhsNome(ghs_nome.getText());
+       ghsProdutos.setGhsDescricao(ghs_descricao.getText());
+       ghsProdutos.setGhsQuantidade( Util.strInt(ghs_quantidade.getText()));
+       ghsProdutos.setGhsPreco( Util.strDouble(ghs_preco.getText()));
+       ghsProdutos.setGhsValorUnitario( Util.strDouble(ghs_valorUnitario.getText()));
+     
         
         return ghsProdutos;
-     }
+        }
      
      public void beanView(GhsProdutos ghsProdutos) {
         idghs_produtos.setText( Util.intStr(ghsProdutos.getIdghsProdutos()));
@@ -95,9 +96,9 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        ghs_quantidade = new javax.swing.JTextField();
         ghs_valorUnitario = new javax.swing.JFormattedTextField();
         ghs_preco = new javax.swing.JFormattedTextField();
+        ghs_quantidade = new javax.swing.JFormattedTextField();
 
         jLabel1.setText("Nome");
 
@@ -144,11 +145,7 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
 
         jLabel9.setText("Valor Unitario");
 
-        ghs_quantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ghs_quantidadeActionPerformed(evt);
-            }
-        });
+        ghs_preco.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,16 +161,18 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(idghs_produtos, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ghs_quantidade)
-                            .addComponent(ghs_valorUnitario, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ghs_valorUnitario)
+                            .addComponent(ghs_preco, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
                                     .addComponent(jLabel9)
-                                    .addComponent(jLabel8))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(ghs_preco, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel8)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel7)))
+                                .addGap(0, 152, Short.MAX_VALUE))
+                            .addComponent(ghs_quantidade)))
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5))
@@ -201,8 +200,8 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ghs_valorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
+                        .addComponent(ghs_valorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ghs_preco))
@@ -229,10 +228,6 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_jBtnOkActionPerformed
-
-    private void ghs_quantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ghs_quantidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ghs_quantidadeActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
@@ -285,7 +280,7 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
     private javax.swing.JEditorPane ghs_descricao;
     private javax.swing.JTextField ghs_nome;
     private javax.swing.JFormattedTextField ghs_preco;
-    private javax.swing.JTextField ghs_quantidade;
+    private javax.swing.JFormattedTextField ghs_quantidade;
     private javax.swing.JFormattedTextField ghs_valorUnitario;
     private javax.swing.JTextField idghs_produtos;
     private javax.swing.JButton jBtnCancelar;

@@ -65,11 +65,11 @@ public void setList(List lista){
         }
         
         if(column == 1 ){
-            return "Nome";
+            return "NOME";
         }
         
         if(column == 2 ){
-            return "Apelido";
+            return "APELIDO";
         }
         
         if(column == 3 ){
@@ -77,7 +77,7 @@ public void setList(List lista){
         }
         
         if(column == 4 ){
-            return "Senha";
+            return "SENHA";
         }
         
         return "";

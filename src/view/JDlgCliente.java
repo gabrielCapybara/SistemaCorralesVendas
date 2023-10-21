@@ -25,18 +25,22 @@ import tools.Util;
 public class JDlgCliente extends javax.swing.JDialog {
 
       private boolean incluindo;
+    public GhsCliente_DAO ghsCliente_DAO;
+    public GhsCliente ghsCliente;
       
     MaskFormatter mascaraCPF, mascaraDataNascimento, mascaraTel, mascaraIdade, mascaraRg, mascaraCep, mascaraCel;
-    GhsCliente_DAO ghsCliente_DAO;
-    GhsCliente ghsCliente;
+    
     /**
      * Creates new form JDlgCliente
      */
     public JDlgCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setTitle("Tela de Cliente");
+        setTitle("Cadastro de Cliente");
         initComponents();
         setLocationRelativeTo(null);
+        
+        ghsCliente_DAO = new GhsCliente_DAO();
+        
         Util.habilitar(false, jBtnConfirmar, jBtnCancelar, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
         Util.habilitar(true, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
      
@@ -47,8 +51,7 @@ public class JDlgCliente extends javax.swing.JDialog {
              mascaraTel = new MaskFormatter("##-####-####");
              mascaraRg = new MaskFormatter("##.###.###-#");
              mascaraIdade = new MaskFormatter("##");
-             mascaraCep = new MaskFormatter("#####-###");
-             mascaraCel = new MaskFormatter("##-####-####");
+             mascaraCel = new MaskFormatter("#####-###");
          } catch (ParseException ex) {
              Logger.getLogger(JDlgCliente.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -63,7 +66,6 @@ public class JDlgCliente extends javax.swing.JDialog {
     }
         public GhsCliente viewBean(){
          GhsCliente ghsCliente = new GhsCliente();   
-         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             
         ghsCliente.setIdgbsCliente( Util.strInt(idgbs_cliente.getText()));
          ghsCliente.setGhsNome(ghs_nome.getText());
@@ -79,7 +81,9 @@ public class JDlgCliente extends javax.swing.JDialog {
          ghsCliente.setGbsTelefoneResidencial(gbs_telefoneResidencial.getText());
          ghsCliente.setGbsCelular(gbs_celular.getText());
          ghsCliente.setGbsEstado(gbs_estado.getText());
+         
          ghsCliente.setGbsIdade( Util.strInt(gbs_idade.getText()));
+         
          ghsCliente.setGbsRegiao(gbs_regiao.getText());
          
                  
@@ -102,6 +106,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         gbs_telefoneResidencial.setText(ghsCliente.getGbsTelefoneResidencial());
         gbs_celular.setText(ghsCliente.getGbsCelular());
         gbs_estado.setText(ghsCliente.getGbsEstado());
+        gbs_idade.setText(Util.intStr(ghsCliente.getGbsIdade()));
         gbs_regiao.setText(ghsCliente.getGbsRegiao());
         
        
@@ -409,12 +414,13 @@ public class JDlgCliente extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true);
+        Util.habilitar(true, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep, jBtnConfirmar, jBtnCancelar);
         incluindo = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
+        ghsCliente = viewBean();
        if (Util.perguntar("Deseja excluir o registro?") == true) {
                 GhsCliente ghsCliente = viewBean();
                 ghsCliente_DAO.delete(ghsCliente);
@@ -424,7 +430,9 @@ public class JDlgCliente extends javax.swing.JDialog {
             }
             
         Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
-
+        Util.habilitar(false, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
@@ -437,6 +445,8 @@ public class JDlgCliente extends javax.swing.JDialog {
                 }
            Util.habilitar(false);
         Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(false, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

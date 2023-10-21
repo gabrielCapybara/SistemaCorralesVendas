@@ -77,7 +77,7 @@ public class GhsProdutos  implements java.io.Serializable {
     }
 
     
-    @Column(name="ghs_preco", nullable=false, precision=7)
+    @Column(name="ghs_preco", nullable=false, precision=10)
     public double getGhsPreco() {
         return this.ghsPreco;
     }

@@ -62,4 +62,15 @@ public class GhsUsuarios_DAO extends DAO_Abstract{
          List lista = criteria.list();
         session.getTransaction().commit();
         return (ArrayList) lista;
-}}
+}
+
+    public GhsUsuarios login(String usuarios, String senha){
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(GhsUsuarios.class);
+    criteria.add(Restrictions.eq("gbsApelido", usuarios));
+    GhsUsuarios usuarioAprovado = (GhsUsuarios) criteria.uniqueResult();
+    session.getTransaction().commit();
+        return usuarioAprovado;
+    }
+
+}

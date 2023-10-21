@@ -144,7 +144,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
 
     private void jMnuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuProdutosActionPerformed
         // TODO add your handling code here:
-        JDlgProdutos jDlgProdutos = new JDlgProdutos(null, true);
+        JDlgProdutosNovo jDlgProdutos = new JDlgProdutosNovo(null, true);
         jDlgProdutos.setVisible(true);
     }//GEN-LAST:event_jMnuProdutosActionPerformed
 
@@ -156,7 +156,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
 
     private void jMnuVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendedorActionPerformed
         // TODO add your handling code here:
-        JDlgVendedor jDlgVendedor = new JDlgVendedor(null, true);
+        JDlgVendedorNovo jDlgVendedor = new JDlgVendedorNovo(null, true);
         jDlgVendedor.setVisible(true);
     }//GEN-LAST:event_jMnuVendedorActionPerformed
 

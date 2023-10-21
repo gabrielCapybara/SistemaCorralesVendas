@@ -10,6 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,18 +32,22 @@ public class GhsVendas  implements java.io.Serializable {
      private Date ghsDataVenda;
      private String ghsFormaPagamento;
      private String ghsStatusVenda;
+     private GhsVendedor ghsVendedor;
+     private GhsCliente ghsCliente;
 
 
     public GhsVendas() {
     }
 
 	
-    public GhsVendas(int idghsVendas, double ghsValorTotal, Date ghsDataVenda, String ghsFormaPagamento, String ghsStatusVenda) {
+    public GhsVendas(int idghsVendas, double ghsValorTotal, Date ghsDataVenda, String ghsFormaPagamento, String ghsStatusVenda, GhsVendedor ghsVendedor, GhsCliente ghsCliente) {
         this.idghsVendas = idghsVendas;
         this.ghsValorTotal = ghsValorTotal;
         this.ghsDataVenda = ghsDataVenda;
         this.ghsFormaPagamento = ghsFormaPagamento;
         this.ghsStatusVenda = ghsStatusVenda;
+        this.ghsVendedor = ghsVendedor;
+        this.ghsCliente = ghsCliente;
     }
    
      @Id 
@@ -95,7 +101,25 @@ public class GhsVendas  implements java.io.Serializable {
     public void setGhsStatusVenda(String ghsStatusVenda) {
         this.ghsStatusVenda = ghsStatusVenda;
     }
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="idghs_vendedor", nullable=false)
+    public GhsVendedor getGhsVendedor() {
+        return this.ghsVendedor;
+    }
+    
+    public void setGhsVendedor(GhsProdutos ghsProdutos) {
+        this.ghsVendedor = ghsVendedor;
+    }
 
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="idghs_cliente", nullable=false)
+    public GhsCliente getGhsCliente() {
+        return this.ghsCliente;
+    }
+    
+    public void setGhsVendas(GhsVendas ghsVendas) {
+        this.ghsCliente = ghsCliente;
+    }
 
 
 
