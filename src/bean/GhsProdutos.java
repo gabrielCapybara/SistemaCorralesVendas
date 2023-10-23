@@ -1,5 +1,5 @@
 package bean;
-// Generated 22/09/2023 19:21:59 by Hibernate Tools 4.3.1
+// Generated 23/10/2023 15:42:33 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -41,8 +41,7 @@ public class GhsProdutos  implements java.io.Serializable {
         this.ghsQuantidade = ghsQuantidade;
         this.ghsValorUnitario = ghsValorUnitario;
     }
-   
-   
+    
    
      @Id 
 
@@ -106,4 +105,7 @@ public class GhsProdutos  implements java.io.Serializable {
         this.ghsValorUnitario = ghsValorUnitario;
     }
 
+
 }
+
+

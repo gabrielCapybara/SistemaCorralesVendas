@@ -1,11 +1,15 @@
 package bean;
-// Generated 22/09/2023 19:21:59 by Hibernate Tools 4.3.1
+// Generated 23/10/2023 15:42:33 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,15 +34,16 @@ public class GhsVendedor  implements java.io.Serializable {
     public GhsVendedor() {
     }
 
+	
     public GhsVendedor(int idghsVendedor, String ghsNome, String ghsEmail, String ghsCpf, Date ghsDataNascimento, String ghsTelefone) {
-       this.idghsVendedor = idghsVendedor;
-       this.ghsNome = ghsNome;
-       this.ghsEmail = ghsEmail;
-       this.ghsCpf = ghsCpf;
-       this.ghsDataNascimento = ghsDataNascimento;
-       this.ghsTelefone = ghsTelefone;
+        this.idghsVendedor = idghsVendedor;
+        this.ghsNome = ghsNome;
+        this.ghsEmail = ghsEmail;
+        this.ghsCpf = ghsCpf;
+        this.ghsDataNascimento = ghsDataNascimento;
+        this.ghsTelefone = ghsTelefone;
     }
-   
+    
      @Id 
 
     
@@ -100,7 +105,6 @@ public class GhsVendedor  implements java.io.Serializable {
     public void setGhsTelefone(String ghsTelefone) {
         this.ghsTelefone = ghsTelefone;
     }
-
 
 
 

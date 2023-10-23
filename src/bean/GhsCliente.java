@@ -1,11 +1,15 @@
 package bean;
-// Generated 22/09/2023 19:21:59 by Hibernate Tools 4.3.1
+// Generated 23/10/2023 15:42:33 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,6 +39,7 @@ public class GhsCliente  implements java.io.Serializable {
      private String gbsEstado;
      private int gbsIdade;
      private String gbsRegiao;
+
 
     public GhsCliente() {
     }
@@ -224,8 +229,6 @@ public class GhsCliente  implements java.io.Serializable {
     public void setGbsRegiao(String gbsRegiao) {
         this.gbsRegiao = gbsRegiao;
     }
-
-
 
 
 }

@@ -1,5 +1,5 @@
 package bean;
-// Generated 22/09/2023 19:21:59 by Hibernate Tools 4.3.1
+// Generated 23/10/2023 15:42:33 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -28,27 +28,29 @@ public class GhsVendas  implements java.io.Serializable {
 
 
      private int idghsVendas;
+     private GhsCliente ghsCliente;
+     private GhsVendedor ghsVendedor;
      private double ghsValorTotal;
      private Date ghsDataVenda;
      private String ghsFormaPagamento;
      private String ghsStatusVenda;
-     private GhsVendedor ghsVendedor;
-     private GhsCliente ghsCliente;
 
 
     public GhsVendas() {
     }
 
 	
-    public GhsVendas(int idghsVendas, double ghsValorTotal, Date ghsDataVenda, String ghsFormaPagamento, String ghsStatusVenda, GhsVendedor ghsVendedor, GhsCliente ghsCliente) {
+    public GhsVendas(int idghsVendas, GhsCliente ghsCliente, GhsVendedor ghsVendedor, double ghsValorTotal, Date ghsDataVenda, String ghsFormaPagamento, String ghsStatusVenda) {
         this.idghsVendas = idghsVendas;
+        this.ghsCliente = ghsCliente;
+        this.ghsVendedor = ghsVendedor;
         this.ghsValorTotal = ghsValorTotal;
         this.ghsDataVenda = ghsDataVenda;
         this.ghsFormaPagamento = ghsFormaPagamento;
         this.ghsStatusVenda = ghsStatusVenda;
-        this.ghsVendedor = ghsVendedor;
-        this.ghsCliente = ghsCliente;
     }
+
+   
    
      @Id 
 
@@ -60,6 +62,26 @@ public class GhsVendas  implements java.io.Serializable {
     
     public void setIdghsVendas(int idghsVendas) {
         this.idghsVendas = idghsVendas;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="idgbs_cliente", nullable=false)
+    public GhsCliente getGhsCliente() {
+        return this.ghsCliente;
+    }
+    
+    public void setGhsCliente(GhsCliente ghsCliente) {
+        this.ghsCliente = ghsCliente;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="idghs_vendedor", nullable=false)
+    public GhsVendedor getGhsVendedor() {
+        return this.ghsVendedor;
+    }
+    
+    public void setGhsVendedor(GhsVendedor ghsVendedor) {
+        this.ghsVendedor = ghsVendedor;
     }
 
     
@@ -101,26 +123,6 @@ public class GhsVendas  implements java.io.Serializable {
     public void setGhsStatusVenda(String ghsStatusVenda) {
         this.ghsStatusVenda = ghsStatusVenda;
     }
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idghs_vendedor", nullable=false)
-    public GhsVendedor getGhsVendedor() {
-        return this.ghsVendedor;
-    }
-    
-    public void setGhsVendedor(GhsProdutos ghsProdutos) {
-        this.ghsVendedor = ghsVendedor;
-    }
-
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idghs_cliente", nullable=false)
-    public GhsCliente getGhsCliente() {
-        return this.ghsCliente;
-    }
-    
-    public void setGhsVendas(GhsVendas ghsVendas) {
-        this.ghsCliente = ghsCliente;
-    }
-
 
 
 }

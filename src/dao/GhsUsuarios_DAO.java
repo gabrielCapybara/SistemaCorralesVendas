@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -72,5 +73,35 @@ public class GhsUsuarios_DAO extends DAO_Abstract{
     session.getTransaction().commit();
         return usuarioAprovado;
     }
-
+    
+    public List listNome(String nome){
+        
+    session.beginTransaction();
+    Criteria crit = session.createCriteria(GhsUsuarios.class);
+    crit.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
+    List results = crit.list();
+    return results;
+    
+    }
+    
+    public List listCpf(String cpf){
+        
+    session.beginTransaction();
+    Criteria crit = session.createCriteria(GhsUsuarios.class);
+    crit.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
+    List results = crit.list();
+    return results;
+    
+    }
+    
+    public List listNomeECpf(String nome, String cpf){
+        
+    session.beginTransaction();
+    Criteria crit = session.createCriteria(GhsUsuarios.class);
+    crit.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
+    crit.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
+    List results = crit.list();
+    return results;
+    
+    }
 }

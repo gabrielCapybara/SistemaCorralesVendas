@@ -37,6 +37,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         jMnuVendedor = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMnuSair = new javax.swing.JMenuItem();
+        jMnuConsultas = new javax.swing.JMenu();
         jMnuMovimento = new javax.swing.JMenu();
         jMnuVendas = new javax.swing.JMenuItem();
 
@@ -99,6 +100,9 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         jMnuCadastros.add(jMnuSair);
 
         jMenuBar1.add(jMnuCadastros);
+
+        jMnuConsultas.setText("Consultas");
+        jMenuBar1.add(jMnuConsultas);
 
         jMnuMovimento.setMnemonic('M');
         jMnuMovimento.setText("Movimento");
@@ -203,6 +207,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMnuCadastros;
     private javax.swing.JMenuItem jMnuClientes;
+    private javax.swing.JMenu jMnuConsultas;
     private javax.swing.JMenu jMnuMovimento;
     private javax.swing.JMenuItem jMnuProdutos;
     private javax.swing.JMenuItem jMnuSair;
