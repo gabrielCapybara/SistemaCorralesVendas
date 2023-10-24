@@ -78,8 +78,9 @@ public class GhsUsuarios_DAO extends DAO_Abstract{
         
     session.beginTransaction();
     Criteria crit = session.createCriteria(GhsUsuarios.class);
-    crit.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
+    crit.add(Restrictions.ilike("gbsNome", nome, MatchMode.ANYWHERE));
     List results = crit.list();
+    session.getTransaction().commit();
     return results;
     
     }
@@ -88,8 +89,9 @@ public class GhsUsuarios_DAO extends DAO_Abstract{
         
     session.beginTransaction();
     Criteria crit = session.createCriteria(GhsUsuarios.class);
-    crit.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
+    crit.add(Restrictions.ilike("gbsCpf", cpf, MatchMode.ANYWHERE));
     List results = crit.list();
+    session.getTransaction().commit();
     return results;
     
     }
@@ -98,9 +100,10 @@ public class GhsUsuarios_DAO extends DAO_Abstract{
         
     session.beginTransaction();
     Criteria crit = session.createCriteria(GhsUsuarios.class);
-    crit.add(Restrictions.ilike("nome", nome, MatchMode.ANYWHERE));
-    crit.add(Restrictions.ilike("cpf", cpf, MatchMode.ANYWHERE));
+    crit.add(Restrictions.ilike("gbsNome", nome, MatchMode.ANYWHERE));
+    crit.add(Restrictions.ilike("gbsCpf", cpf, MatchMode.ANYWHERE));
     List results = crit.list();
+    session.getTransaction().commit();
     return results;
     
     }
