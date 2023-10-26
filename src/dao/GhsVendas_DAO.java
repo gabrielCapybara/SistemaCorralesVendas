@@ -28,7 +28,7 @@ public class GhsVendas_DAO extends DAO_Abstract{
 
     @Override
     public void update(Object object) {
-        session.beginTransaction();
+     session.beginTransaction();
       session.flush();
       session.clear();
       session.update(object);

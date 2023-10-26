@@ -106,7 +106,10 @@ public class GhsVendedor  implements java.io.Serializable {
         this.ghsTelefone = ghsTelefone;
     }
 
-
+@Override
+    public String toString(){
+        return getGhsNome();
+    }
 
 }
 

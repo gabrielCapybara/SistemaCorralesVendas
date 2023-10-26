@@ -230,6 +230,11 @@ public class GhsCliente  implements java.io.Serializable {
         this.gbsRegiao = gbsRegiao;
     }
 
+    @Override
+    public String toString(){
+        return getGhsNome();
+    }
+    
 
 }
 

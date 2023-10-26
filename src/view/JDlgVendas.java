@@ -5,10 +5,15 @@
  */
 package view;
 
+import bean.GhsCliente;
 import bean.GhsVendas;
+import bean.GhsVendedor;
+import dao.GhsCliente_DAO;
 import dao.GhsVendas_DAO;
+import dao.GhsVendedor_DAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
@@ -24,7 +29,9 @@ public class JDlgVendas extends javax.swing.JDialog {
     private boolean incluindo;
     GhsVendas ghsVendas;
     GhsVendas_DAO ghsVendas_DAO;
-      MaskFormatter mascaraData;
+    GhsCliente_DAO ghsCliente_DAO;
+    GhsVendedor_DAO ghsVendedor_DAO;
+    MaskFormatter mascaraData;
     
     /**
      * Creates new form JDlgVendas
@@ -35,27 +42,45 @@ public class JDlgVendas extends javax.swing.JDialog {
         setTitle("Vendas");
         setLocationRelativeTo(null);
         
+        ghsCliente_DAO = new GhsCliente_DAO();
+        ghsVendedor_DAO = new GhsVendedor_DAO();
+        List lista = ghsCliente_DAO.listAll();
+        List lista2 = ghsVendedor_DAO.listAll();
+        
+        for (int i = 0; i < lista.size(); i++) {
+            GhsCliente ghsCliente = (GhsCliente) lista.get(i);
+            idgbs_cliente.addItem(ghsCliente);
+        }
+        for (int j = 0; j < lista2.size(); j++) {
+            GhsVendedor ghsVendedor = (GhsVendedor) lista2.get(j);
+            idghs_vendedor.addItem(ghsVendedor);    
+        
+    
         Util.habilitar(false, jBtnConfirmar, jBtnCancelar, idghs_vendas, idgbs_cliente, ghs_dataVenda, idghs_vendas, idghs_vendedor, ghs_valorTotal, jTable1, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
         Util.habilitar(true, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
         
         try {
             mascaraData = new MaskFormatter("##/##/####");
-        } catch (ParseException ex) {
+       } catch (ParseException ex) {
             Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         ghs_dataVenda.setFormatterFactory( new DefaultFormatterFactory(mascaraData));
         
     }
+    }
 
      public GhsVendas viewBean(){
-          GhsVendas ghsVendas = new GhsVendas();   
+        GhsVendas ghsVendas = new GhsVendas();   
      
-          ghsVendas.setIdghsVendas(Util.strInt(idghs_vendas.getText()));
-          ghsVendas.setGhsDataVenda(Util.strDate(ghs_dataVenda.getText()));
-          //cliente
-          //vendedor
-          ghsVendas.setGhsValorTotal(Util.strDouble(ghs_valorTotal.getText()));
+        ghsVendas.setIdghsVendas(Util.strInt(idghs_vendas.getText()));
+        ghsVendas.setGhsDataVenda(Util.strDate(ghs_dataVenda.getText()));
+        GhsCliente clienteSelecionado = (GhsCliente) idgbs_cliente.getSelectedItem();
+        ghsVendas.setGhsCliente(clienteSelecionado);
+        GhsVendedor vendedorSelecionado = (GhsVendedor) idghs_vendedor.getSelectedItem();
+        ghsVendas.setGhsVendedor(vendedorSelecionado);
+        
+        ghsVendas.setGhsValorTotal(Util.strDouble(ghs_valorTotal.getText()));
           
          return ghsVendas;
       
@@ -65,8 +90,8 @@ public class JDlgVendas extends javax.swing.JDialog {
       idghs_vendas.setText( Util.intStr(ghsVendas.getIdghsVendas()));
       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
       ghs_dataVenda.setText( Util.Datestr(ghsVendas.getGhsDataVenda()));
-      //cliente
-      //vendedor
+      idgbs_cliente.setSelectedItem(ghsVendas.getGhsCliente());
+      idghs_vendedor.setSelectedItem(ghsVendas.getGhsVendedor());
       ghs_valorTotal.setText(Util.doubleStr(ghsVendas.getGhsValorTotal()));
       
     }
@@ -100,8 +125,8 @@ public class JDlgVendas extends javax.swing.JDialog {
         jBtnExcluir = new javax.swing.JButton();
         jBtnAlterar = new javax.swing.JButton();
         jBtnPesquisar = new javax.swing.JButton();
-        idgbs_cliente = new javax.swing.JComboBox<>();
-        idghs_vendedor = new javax.swing.JComboBox<>();
+        idgbs_cliente = new javax.swing.JComboBox<GhsCliente>();
+        idghs_vendedor = new javax.swing.JComboBox<GhsVendedor>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -240,14 +265,11 @@ public class JDlgVendas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        idgbs_cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         idgbs_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idgbs_clienteActionPerformed(evt);
             }
         });
-
-        idghs_vendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -362,6 +384,10 @@ public class JDlgVendas extends javax.swing.JDialog {
         } else {
             ghsVendas_DAO.update(ghsVendas);
         }
+        
+        Util.habilitar(false,jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
+        Util.limparCampos(idghs_vendas, ghs_dataVenda, idgbs_cliente, idghs_vendas, idghs_vendedor, ghs_valorTotal, jTable1);
+        
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnIncluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluir1ActionPerformed
@@ -435,9 +461,9 @@ public class JDlgVendas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField ghs_dataVenda;
     private javax.swing.JTextField ghs_valorTotal;
-    private javax.swing.JComboBox<String> idgbs_cliente;
+    private javax.swing.JComboBox<GhsCliente> idgbs_cliente;
     private javax.swing.JTextField idghs_vendas;
-    private javax.swing.JComboBox<String> idghs_vendedor;
+    private javax.swing.JComboBox<GhsVendedor> idghs_vendedor;
     private javax.swing.JButton jBtbExcluir1;
     private javax.swing.JButton jBtnAlterar;
     private javax.swing.JButton jBtnAlterar1;
