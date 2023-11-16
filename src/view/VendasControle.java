@@ -19,6 +19,7 @@ public class VendasControle extends AbstractTableModel {
     private List lista;
     public void setList(List lista){
     this.lista = lista;
+    this.fireTableDataChanged();
     }
     
     public GhsVendas getBean(int row){
@@ -33,7 +34,7 @@ public class VendasControle extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -47,6 +48,10 @@ public class VendasControle extends AbstractTableModel {
         }
         if (columnIndex == 2 ) {
             return vendas.getGhsValorTotal();
+        }
+        
+         if (columnIndex == 3 ) {
+            return vendas.getGhsFormaPagamento();
         }
         
          return "";
@@ -64,6 +69,10 @@ public class VendasControle extends AbstractTableModel {
         
         if(column == 2 ){
             return "TOTAL";
+        }
+        
+        if(column == 3 ){
+            return "FORMA_PAGAMENTO";
         }
         
         return "";

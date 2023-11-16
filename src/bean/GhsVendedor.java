@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="ghs_vendedor"
     ,catalog="db_gabrielh"
+    //db_gabriel_corrales
 )
 public class GhsVendedor  implements java.io.Serializable {
 
@@ -30,6 +31,7 @@ public class GhsVendedor  implements java.io.Serializable {
      private String ghsCpf;
      private Date ghsDataNascimento;
      private String ghsTelefone;
+     private int ghsSexo;
 
     public GhsVendedor() {
     }
@@ -42,6 +44,7 @@ public class GhsVendedor  implements java.io.Serializable {
         this.ghsCpf = ghsCpf;
         this.ghsDataNascimento = ghsDataNascimento;
         this.ghsTelefone = ghsTelefone;
+        this.ghsSexo = ghsSexo;
     }
     
      @Id 
@@ -105,7 +108,16 @@ public class GhsVendedor  implements java.io.Serializable {
     public void setGhsTelefone(String ghsTelefone) {
         this.ghsTelefone = ghsTelefone;
     }
-
+    
+    @Column(name="ghs_sexo", nullable=false)
+    public int getGhsSexo() {
+        return this.ghsSexo;
+    }
+    
+    public void setGhsSexo(int ghsSexo) {
+        this.ghsSexo = ghsSexo;
+    }
+    
 @Override
     public String toString(){
         return getGhsNome();

@@ -18,6 +18,7 @@ public class ClienteControle extends AbstractTableModel {
     private List lista;
     public void setList(List lista){
     this.lista = lista;
+    this.fireTableDataChanged();
     }
     
     public GhsCliente getBean(int row){
@@ -51,7 +52,7 @@ public class ClienteControle extends AbstractTableModel {
             return clientes.getGbsRg();
         }
         if (columnIndex == 4 ) {
-            return clientes.getGbsEmail();
+            return clientes.getGbsIdade();
         }
          return "";
     }
@@ -75,7 +76,7 @@ public class ClienteControle extends AbstractTableModel {
         }
         
         if(column == 4 ){
-            return "E-MAIL";
+            return "Idade";
         }
         
         return "";

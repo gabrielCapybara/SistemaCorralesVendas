@@ -5,6 +5,11 @@
  */
 package view;
 
+import query.JDlgConsultaCliente;
+import query.JDlgConsultaProdutos;
+import query.JDlgConsultaUsuarios;
+import query.JDlgConsultaVendedor;
+
 /**
  *
  * @author TSUIIKUII
@@ -29,6 +34,16 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jToolBar1 = new javax.swing.JToolBar();
+        Tool1 = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        Tool2 = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
+        Tool3 = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
+        Tool4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMnuCadastros = new javax.swing.JMenu();
         jMnuClientes = new javax.swing.JMenuItem();
@@ -38,10 +53,68 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMnuSair = new javax.swing.JMenuItem();
         jMnuConsultas = new javax.swing.JMenu();
+        jConsult1 = new javax.swing.JMenuItem();
+        jConsult2 = new javax.swing.JMenuItem();
+        jConsult3 = new javax.swing.JMenuItem();
+        jConsult4 = new javax.swing.JMenuItem();
         jMnuMovimento = new javax.swing.JMenu();
         jMnuVendas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jToolBar1.setFloatable(false);
+        jToolBar1.setRollover(true);
+
+        Tool1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendedor.png"))); // NOI18N
+        Tool1.setFocusable(false);
+        Tool1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Tool1.setMaximumSize(new java.awt.Dimension(60, 45));
+        Tool1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Tool1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Tool1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(Tool1);
+        jToolBar1.add(jSeparator4);
+
+        Tool2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/order_product_online_ecommerce_market_buy_icon_176857.png"))); // NOI18N
+        Tool2.setFocusable(false);
+        Tool2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Tool2.setMaximumSize(new java.awt.Dimension(60, 45));
+        Tool2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Tool2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Tool2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(Tool2);
+        jToolBar1.add(jSeparator5);
+
+        Tool3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/etiqueta-de-venda.png"))); // NOI18N
+        Tool3.setFocusable(false);
+        Tool3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Tool3.setMaximumSize(new java.awt.Dimension(60, 45));
+        Tool3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Tool3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Tool3ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(Tool3);
+        jToolBar1.add(jSeparator6);
+
+        Tool4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/exit_1.png"))); // NOI18N
+        Tool4.setFocusable(false);
+        Tool4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Tool4.setMaximumSize(new java.awt.Dimension(60, 45));
+        Tool4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Tool4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Tool4ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(Tool4);
 
         jMnuCadastros.setMnemonic('C');
         jMnuCadastros.setText("Principal");
@@ -102,6 +175,43 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMnuCadastros);
 
         jMnuConsultas.setText("Consultas");
+
+        jConsult1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/male-user-add_25347.png"))); // NOI18N
+        jConsult1.setText("Cliente");
+        jConsult1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsult1ActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jConsult1);
+
+        jConsult2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Female-user-add_25430.png"))); // NOI18N
+        jConsult2.setText("Usuários");
+        jConsult2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsult2ActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jConsult2);
+
+        jConsult3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/order_product_online_ecommerce_market_buy_icon_176857.png"))); // NOI18N
+        jConsult3.setText("Produtos");
+        jConsult3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsult3ActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jConsult3);
+
+        jConsult4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendedor.png"))); // NOI18N
+        jConsult4.setText("Vendedor");
+        jConsult4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsult4ActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jConsult4);
+
         jMenuBar1.add(jMnuConsultas);
 
         jMnuMovimento.setMnemonic('M');
@@ -125,11 +235,13 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 236, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,8 +279,55 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
     private void jMnuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendasActionPerformed
         // TODO add your handling code here:
         JDlgVendas jDlgVendas = new JDlgVendas(null, true);
-        jDlgVendas.setVisible(true);
+        jDlgVendas.setVisible(true); 
     }//GEN-LAST:event_jMnuVendasActionPerformed
+
+    private void jConsult1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsult1ActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaCliente jDlgConsultaCliente = new JDlgConsultaCliente(null,true);
+        jDlgConsultaCliente.setVisible(true);
+    }//GEN-LAST:event_jConsult1ActionPerformed
+
+    private void jConsult3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsult3ActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaProdutos jDlgConsultaProdutos = new JDlgConsultaProdutos(null,true);
+        jDlgConsultaProdutos.setVisible(true);
+    }//GEN-LAST:event_jConsult3ActionPerformed
+
+    private void jConsult2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsult2ActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaUsuarios jDlgConsultaUsuarios = new JDlgConsultaUsuarios(null,true);
+        jDlgConsultaUsuarios.setVisible(true);
+    }//GEN-LAST:event_jConsult2ActionPerformed
+
+    private void jConsult4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsult4ActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaVendedor jDlgConsultaVendedor = new JDlgConsultaVendedor(null,true);
+        jDlgConsultaVendedor.setVisible(true);
+    }//GEN-LAST:event_jConsult4ActionPerformed
+
+    private void Tool1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tool1ActionPerformed
+        // TODO add your handling code here:
+         JDlgVendedorNovo jDlgVendedor = new JDlgVendedorNovo(null, true);
+        jDlgVendedor.setVisible(true);
+    }//GEN-LAST:event_Tool1ActionPerformed
+
+    private void Tool2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tool2ActionPerformed
+        // TODO add your handling code here:
+        JDlgProdutosNovo jDlgProdutos = new JDlgProdutosNovo(null, true);
+        jDlgProdutos.setVisible(true);
+    }//GEN-LAST:event_Tool2ActionPerformed
+
+    private void Tool3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tool3ActionPerformed
+        // TODO add your handling code here:
+         JDlgVendas jDlgVendas = new JDlgVendas(null, true);
+        jDlgVendas.setVisible(true); 
+    }//GEN-LAST:event_Tool3ActionPerformed
+
+    private void Tool4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tool4ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_Tool4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,6 +365,14 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Tool1;
+    private javax.swing.JButton Tool2;
+    private javax.swing.JButton Tool3;
+    private javax.swing.JButton Tool4;
+    private javax.swing.JMenuItem jConsult1;
+    private javax.swing.JMenuItem jConsult2;
+    private javax.swing.JMenuItem jConsult3;
+    private javax.swing.JMenuItem jConsult4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMnuCadastros;
     private javax.swing.JMenuItem jMnuClientes;
@@ -217,5 +384,11 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuVendas;
     private javax.swing.JMenuItem jMnuVendedor;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JToolBar.Separator jSeparator6;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

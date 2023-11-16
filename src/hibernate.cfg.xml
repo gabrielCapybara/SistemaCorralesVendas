@@ -45,6 +45,11 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_gabrielh?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    
+    <!--<property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_gabriel_corrales?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">gabriel_corrales</property>
+    <property name="hibernate.connection.password">gabriel_corrales</property>-->
+    
     <mapping class="bean.GhsCliente"/>
     <mapping class="bean.GhsVendasProdutos"/>
     <mapping class="bean.GhsProdutos"/>

@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ghs_vendas_produtos"
     ,catalog="db_gabrielh"
+    //db_gabriel_corrales
 )
 public class GhsVendasProdutos  implements java.io.Serializable {
 

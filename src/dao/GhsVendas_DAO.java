@@ -8,6 +8,7 @@ package dao;
 
 import bean.GhsVendas;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Transaction;
@@ -62,4 +63,35 @@ public class GhsVendas_DAO extends DAO_Abstract{
          List lista = criteria.list();
         session.getTransaction().commit();
         return (ArrayList) lista;
-}}
+}
+
+public List listFormaPagamento(String formaPagamento) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GhsVendas.class);
+        criteria.add(Restrictions.like("ghsFormaPagamento", "%" + formaPagamento + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+
+    }
+    
+    public List listData(Date data) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GhsVendas.class);
+        criteria.add(Restrictions.eq("ghsDataVenda", data));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public List listFormaPagamentoEData(String formaPagamento, Date data) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GhsVendas.class);
+        criteria.add(Restrictions.like("ghsFormaPagamento", "%" + formaPagamento + "%"));
+        criteria.add(Restrictions.eq("ghsDataVenda", data));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+}

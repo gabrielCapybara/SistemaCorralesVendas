@@ -8,9 +8,11 @@ package dao;
 
 import bean.GhsVendedor;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -64,4 +66,38 @@ public class GhsVendedor_DAO extends DAO_Abstract{
          List lista = criteria.list();
         session.getTransaction().commit();
         return (ArrayList) lista;
-}}
+}
+
+public List listNome(String nome){
+        
+    session.beginTransaction();
+    Criteria crit = session.createCriteria(GhsVendedor.class);
+    crit.add(Restrictions.like("ghsNome", nome, MatchMode.ANYWHERE));
+    List results = crit.list();
+    session.getTransaction().commit();
+    return results;
+    
+    }
+    
+    public List listData(Date data) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GhsVendedor.class);
+        criteria.add(Restrictions.eq("ghsDataNascimento", data));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public List listNomeEData(String nome, Date data) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GhsVendedor.class);
+        criteria.add(Restrictions.like("ghsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.eq("ghsDataNascimento", data));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+
+
+}

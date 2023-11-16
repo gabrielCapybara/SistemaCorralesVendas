@@ -5,32 +5,33 @@
  */
 package query;
 
-import dao.GhsUsuarios_DAO;
+import dao.GhsCliente_DAO;
 import java.util.List;
-import view.JDlgUsuarios;
-import view.UsuarioControle;
+import tools.Util;
+import view.ClienteControle;
+import view.JDlgCliente;
 
 /**
  *
  * @author TSUIIKUII
  */
-public class JDlgConsultaUsuarios extends javax.swing.JDialog {
-private JDlgUsuarios jDlgUsuarios;
- GhsUsuarios_DAO ghsUsuarios_DAO;
- UsuarioControle usuarioControle;
+public class JDlgConsultaCliente extends javax.swing.JDialog {
+private JDlgCliente jDlgCliente;
+ GhsCliente_DAO ghsCliente_DAO;
+ ClienteControle clienteControle;
     /**
-     * Creates new form JDlgConsultaUsuarios
+     * Creates new form JDlgConsultaCliente
      */
-    public JDlgConsultaUsuarios(java.awt.Frame parent, boolean modal) {
+    public JDlgConsultaCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Consulta de Usuários");
+        setTitle("Consulta de Clientes");
         setLocationRelativeTo(null);
-        usuarioControle = new UsuarioControle();
-        ghsUsuarios_DAO = new GhsUsuarios_DAO();
-        List lista = ghsUsuarios_DAO.listAll();
-        usuarioControle.setList(lista);
-        jTable1.setModel(usuarioControle);
+        clienteControle = new ClienteControle();
+        ghsCliente_DAO = new GhsCliente_DAO();
+        List lista = ghsCliente_DAO.listAll();
+        clienteControle.setList(lista);
+        jTable1.setModel(clienteControle);
     }
 
     /**
@@ -44,10 +45,10 @@ private JDlgUsuarios jDlgUsuarios;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        gbs_Nome = new javax.swing.JTextField();
+        ghs_nome = new javax.swing.JTextField();
         jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        gbs_Cpf = new javax.swing.JFormattedTextField();
+        gbs_idade = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -64,7 +65,7 @@ private JDlgUsuarios jDlgUsuarios;
             }
         });
 
-        jLabel2.setText("CPF");
+        jLabel2.setText("Idade");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,14 +74,14 @@ private JDlgUsuarios jDlgUsuarios;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(gbs_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ghs_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(gbs_Cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(gbs_idade, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnConsultar)))
                 .addContainerGap())
@@ -93,9 +94,9 @@ private JDlgUsuarios jDlgUsuarios;
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gbs_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ghs_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnConsultar)
-                    .addComponent(gbs_Cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gbs_idade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
@@ -117,7 +118,7 @@ private JDlgUsuarios jDlgUsuarios;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,28 +132,26 @@ private JDlgUsuarios jDlgUsuarios;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-
-        if(gbs_Nome.getText().equals("") && gbs_Cpf.getText().equals("")){
-            ghsUsuarios_DAO = new GhsUsuarios_DAO();
-            List lista = ghsUsuarios_DAO.listAll();
+        if(ghs_nome.getText().equals("") && gbs_idade.getText().equals("")){
+            ghsCliente_DAO = new GhsCliente_DAO();
+            List lista = ghsCliente_DAO.listAll();
         } else {
-             if(gbs_Nome.getText().equals("") && !gbs_Cpf.getText().equals("")){
-                 List lista = ghsUsuarios_DAO.listNomeECpf(gbs_Nome.getText(), gbs_Cpf.getText());
-                 usuarioControle.setList(lista);
+             if(ghs_nome.getText().equals("") && !gbs_idade.getText().equals("")){
+                 List lista = ghsCliente_DAO.listNomeEIdade(ghs_nome.getText(), Util.strInt(gbs_idade.getText()));
+                 clienteControle.setList(lista);
         } else {
-            if(!gbs_Nome.getText().equals("")){
-                List lista = ghsUsuarios_DAO.listNome(gbs_Nome.getText());
-                usuarioControle.setList(lista);
+            if(!ghs_nome.getText().equals("")){
+                List lista = ghsCliente_DAO.listNome(ghs_nome.getText());
+                clienteControle.setList(lista);
         } else {
-            if(!gbs_Cpf.getText().equals("")){
-                List lista = ghsUsuarios_DAO.listCpf(gbs_Cpf.getText());
-                usuarioControle.setList(lista);
+            if(!gbs_idade.getText().equals("")){
+                List lista = ghsCliente_DAO.listIdade(Util.strInt(gbs_idade.getText()));
+                clienteControle.setList(lista);
              }      
            }
-         
-            }
-        }
-
+         }
+       }    
+        
     }//GEN-LAST:event_jBtnConsultarActionPerformed
 
     /**
@@ -172,20 +171,20 @@ private JDlgUsuarios jDlgUsuarios;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgConsultaUsuarios dialog = new JDlgConsultaUsuarios(new javax.swing.JFrame(), true);
+                JDlgConsultaCliente dialog = new JDlgConsultaCliente(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -198,8 +197,8 @@ private JDlgUsuarios jDlgUsuarios;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField gbs_Cpf;
-    private javax.swing.JTextField gbs_Nome;
+    private javax.swing.JTextField gbs_idade;
+    private javax.swing.JTextField ghs_nome;
     private javax.swing.JButton jBtnConsultar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

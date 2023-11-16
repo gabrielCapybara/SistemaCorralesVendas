@@ -53,6 +53,7 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
         ghsVendedor.setGhsCpf(ghs_cpf.getText());
         ghsVendedor.setGhsEmail(ghs_email.getText());
        ghsVendedor.setGhsTelefone(ghs_telefone.getText());
+       ghsVendedor.setGhsSexo(ghs_sexo.getSelectedIndex());
       
         
         return ghsVendedor;
@@ -65,6 +66,7 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
         ghs_email.setText(ghsVendedor.getGhsEmail());
         ghs_telefone.setText(ghsVendedor.getGhsTelefone());
         ghs_dataNascimento.setText( Util.Datestr(ghsVendedor.getGhsDataNascimento()));
+        ghs_sexo.setSelectedIndex(ghsVendedor.getGhsSexo());
 
      }
     /**
@@ -93,6 +95,8 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
         ghs_dataNascimento = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         ghs_telefone = new javax.swing.JFormattedTextField();
+        jLabel7 = new javax.swing.JLabel();
+        ghs_sexo = new javax.swing.JComboBox<>();
 
         jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok_1.png"))); // NOI18N
         jBtnOk.setText("Ok");
@@ -145,6 +149,10 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
 
         jLabel6.setText("Telefone");
 
+        jLabel7.setText("Sexo");
+
+        ghs_sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "masculino", "feminino" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,7 +175,9 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
                             .addComponent(ghs_cpf, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
-                            .addComponent(ghs_dataNascimento)))
+                            .addComponent(ghs_dataNascimento)
+                            .addComponent(jLabel7)
+                            .addComponent(ghs_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -177,9 +187,13 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idghs_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idghs_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ghs_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -285,6 +299,7 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField ghs_dataNascimento;
     private javax.swing.JTextField ghs_email;
     private javax.swing.JTextField ghs_nome;
+    private javax.swing.JComboBox<String> ghs_sexo;
     private javax.swing.JFormattedTextField ghs_telefone;
     private javax.swing.JTextField idghs_vendedor;
     private javax.swing.JButton jBtnCancelar;
@@ -297,6 +312,7 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -62,4 +63,43 @@ public class GhsProdutos_DAO extends DAO_Abstract{
          List lista = criteria.list();
         session.getTransaction().commit();
         return (ArrayList) lista;
-}}
+        
+}
+
+public List listNome(String nome){
+        
+    session.beginTransaction();
+    Criteria crit = session.createCriteria(GhsProdutos.class);
+    crit.add(Restrictions.like("ghsNome", nome, MatchMode.ANYWHERE));
+    List results = crit.list();
+    session.getTransaction().commit();
+    return results;
+    
+    }
+    
+    public List listQuantidade(int quantidade){
+        
+    session.beginTransaction();
+    Criteria crit = session.createCriteria(GhsProdutos.class);
+    crit.add(Restrictions.ge("ghsQuantidade", quantidade));
+    List results = crit.list();
+    session.getTransaction().commit();
+    return results;
+    
+    }
+    
+    public List listNomeEQuantidade(String nome, int quantidade){
+        
+    session.beginTransaction();
+    Criteria crit = session.createCriteria(GhsProdutos.class);
+    crit.add(Restrictions.like("ghsNome", nome, MatchMode.ANYWHERE));
+    crit.add(Restrictions.ge("ghsQuantidade", quantidade));
+    List results = crit.list();
+    session.getTransaction().commit();
+    return results;
+    
+    }
+    
+    
+
+}

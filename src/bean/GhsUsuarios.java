@@ -16,6 +16,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="ghs_usuarios"
     ,catalog="db_gabrielh"
+    //db_gabriel_corrales
 )
 public class GhsUsuarios  implements java.io.Serializable {
 

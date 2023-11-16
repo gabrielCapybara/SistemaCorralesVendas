@@ -5,32 +5,34 @@
  */
 package query;
 
-import dao.GhsUsuarios_DAO;
+import dao.GhsVendas_DAO;
+import java.util.Date;
 import java.util.List;
-import view.JDlgUsuarios;
-import view.UsuarioControle;
+import tools.Util;
+import view.JDlgVendas;
+import view.VendasControle;
 
 /**
  *
  * @author TSUIIKUII
  */
-public class JDlgConsultaUsuarios extends javax.swing.JDialog {
-private JDlgUsuarios jDlgUsuarios;
- GhsUsuarios_DAO ghsUsuarios_DAO;
- UsuarioControle usuarioControle;
+public class JDlgConsultaVendas extends javax.swing.JDialog {
+private JDlgVendas jDlgVendas;
+ GhsVendas_DAO ghsVendas_DAO;
+ VendasControle vendasControle;
     /**
-     * Creates new form JDlgConsultaUsuarios
+     * Creates new form JDlgConsultaVendas
      */
-    public JDlgConsultaUsuarios(java.awt.Frame parent, boolean modal) {
+    public JDlgConsultaVendas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Consulta de Usuários");
+        setTitle("Consulta de Vendas");
         setLocationRelativeTo(null);
-        usuarioControle = new UsuarioControle();
-        ghsUsuarios_DAO = new GhsUsuarios_DAO();
-        List lista = ghsUsuarios_DAO.listAll();
-        usuarioControle.setList(lista);
-        jTable1.setModel(usuarioControle);
+        vendasControle = new VendasControle();
+        ghsVendas_DAO = new GhsVendas_DAO();
+        List lista = ghsVendas_DAO.listAll();
+        vendasControle.setList(lista);
+        jTable1.setModel(vendasControle);
     }
 
     /**
@@ -44,10 +46,10 @@ private JDlgUsuarios jDlgUsuarios;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        gbs_Nome = new javax.swing.JTextField();
+        ghs_formaPagamento = new javax.swing.JTextField();
         jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        gbs_Cpf = new javax.swing.JFormattedTextField();
+        ghs_dataVenda = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -55,7 +57,7 @@ private JDlgUsuarios jDlgUsuarios;
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Forma de Pagamento");
 
         jBtnConsultar.setText("CONSULTAR");
         jBtnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +66,7 @@ private JDlgUsuarios jDlgUsuarios;
             }
         });
 
-        jLabel2.setText("CPF");
+        jLabel2.setText("Data");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,14 +75,14 @@ private JDlgUsuarios jDlgUsuarios;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(gbs_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ghs_formaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(gbs_Cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ghs_dataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnConsultar)))
                 .addContainerGap())
@@ -93,9 +95,9 @@ private JDlgUsuarios jDlgUsuarios;
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gbs_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ghs_formaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnConsultar)
-                    .addComponent(gbs_Cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ghs_dataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
@@ -117,7 +119,7 @@ private JDlgUsuarios jDlgUsuarios;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,27 +133,27 @@ private JDlgUsuarios jDlgUsuarios;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-
-        if(gbs_Nome.getText().equals("") && gbs_Cpf.getText().equals("")){
-            ghsUsuarios_DAO = new GhsUsuarios_DAO();
-            List lista = ghsUsuarios_DAO.listAll();
-        } else {
-             if(gbs_Nome.getText().equals("") && !gbs_Cpf.getText().equals("")){
-                 List lista = ghsUsuarios_DAO.listNomeECpf(gbs_Nome.getText(), gbs_Cpf.getText());
-                 usuarioControle.setList(lista);
-        } else {
-            if(!gbs_Nome.getText().equals("")){
-                List lista = ghsUsuarios_DAO.listNome(gbs_Nome.getText());
-                usuarioControle.setList(lista);
-        } else {
-            if(!gbs_Cpf.getText().equals("")){
-                List lista = ghsUsuarios_DAO.listCpf(gbs_Cpf.getText());
-                usuarioControle.setList(lista);
-             }      
-           }
-         
-            }
+    if (ghs_formaPagamento.getText().equals("") && ghs_dataVenda.getText().equals("")) {
+    List lista = ghsVendas_DAO.listAll();
+    vendasControle.setList(lista);
+    } else {
+    if (!ghs_formaPagamento.getText().equals("") && !ghs_dataVenda.getText().equals("")) {
+        Date data = Util.strDate(ghs_dataVenda.getText());
+        List lista = ghsVendas_DAO.listFormaPagamentoEData(ghs_formaPagamento.getText(), data);
+        vendasControle.setList(lista);
+    } else {
+        if (!ghs_formaPagamento.getText().equals("")) {
+            List lista = ghsVendas_DAO.listFormaPagamento(ghs_formaPagamento.getText());
+            vendasControle.setList(lista);
         }
+        if (!ghs_formaPagamento.getText().equals("")) {
+            Date data = Util.strDate(ghs_formaPagamento.getText());
+            List lista = ghsVendas_DAO.listData(data);
+            vendasControle.setList(lista);
+        }
+    }
+    }
+       
 
     }//GEN-LAST:event_jBtnConsultarActionPerformed
 
@@ -172,20 +174,20 @@ private JDlgUsuarios jDlgUsuarios;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgConsultaUsuarios dialog = new JDlgConsultaUsuarios(new javax.swing.JFrame(), true);
+                JDlgConsultaVendas dialog = new JDlgConsultaVendas(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -198,8 +200,8 @@ private JDlgUsuarios jDlgUsuarios;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField gbs_Cpf;
-    private javax.swing.JTextField gbs_Nome;
+    private javax.swing.JFormattedTextField ghs_dataVenda;
+    private javax.swing.JTextField ghs_formaPagamento;
     private javax.swing.JButton jBtnConsultar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
