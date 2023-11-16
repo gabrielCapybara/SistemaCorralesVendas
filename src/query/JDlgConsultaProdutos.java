@@ -135,6 +135,8 @@ private JDlgProdutosNovo jDlgProdutosNovo;
          if(ghs_nome.getText().equals("") && ghs_quantidade.getText().equals("")){
             ghsProdutos_DAO = new GhsProdutos_DAO();
             List lista = ghsProdutos_DAO.listAll();
+            produtosControle.setList(lista);
+            
         } else {
              if(ghs_nome.getText().equals("") && !ghs_quantidade.getText().equals("")){
                  List lista = ghsProdutos_DAO.listNomeEQuantidade(ghs_nome.getText(), Util.strInt(ghs_quantidade.getText()));

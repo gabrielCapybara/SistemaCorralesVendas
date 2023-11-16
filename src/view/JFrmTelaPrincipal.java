@@ -62,6 +62,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jToolBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
@@ -117,7 +118,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(Tool4);
 
         jMnuCadastros.setMnemonic('C');
-        jMnuCadastros.setText("Principal");
+        jMnuCadastros.setText("Cadastro");
 
         jMnuClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMnuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/male-user-add_25347.png"))); // NOI18N
@@ -176,6 +177,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
 
         jMnuConsultas.setText("Consultas");
 
+        jConsult1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jConsult1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/male-user-add_25347.png"))); // NOI18N
         jConsult1.setText("Cliente");
         jConsult1.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +187,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         });
         jMnuConsultas.add(jConsult1);
 
+        jConsult2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         jConsult2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Female-user-add_25430.png"))); // NOI18N
         jConsult2.setText("Usuários");
         jConsult2.addActionListener(new java.awt.event.ActionListener() {
@@ -194,6 +197,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         });
         jMnuConsultas.add(jConsult2);
 
+        jConsult3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         jConsult3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/order_product_online_ecommerce_market_buy_icon_176857.png"))); // NOI18N
         jConsult3.setText("Produtos");
         jConsult3.addActionListener(new java.awt.event.ActionListener() {
@@ -203,6 +207,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         });
         jMnuConsultas.add(jConsult3);
 
+        jConsult4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         jConsult4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendedor.png"))); // NOI18N
         jConsult4.setText("Vendedor");
         jConsult4.addActionListener(new java.awt.event.ActionListener() {

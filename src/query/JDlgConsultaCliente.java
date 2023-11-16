@@ -135,6 +135,8 @@ private JDlgCliente jDlgCliente;
         if(ghs_nome.getText().equals("") && gbs_idade.getText().equals("")){
             ghsCliente_DAO = new GhsCliente_DAO();
             List lista = ghsCliente_DAO.listAll();
+            clienteControle.setList(lista);
+            
         } else {
              if(ghs_nome.getText().equals("") && !gbs_idade.getText().equals("")){
                  List lista = ghsCliente_DAO.listNomeEIdade(ghs_nome.getText(), Util.strInt(gbs_idade.getText()));

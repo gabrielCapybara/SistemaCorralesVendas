@@ -68,7 +68,8 @@ public class GhsUsuarios_DAO extends DAO_Abstract{
     public GhsUsuarios login(String usuarios, String senha){
     session.beginTransaction();
     Criteria criteria = session.createCriteria(GhsUsuarios.class);
-    criteria.add(Restrictions.eq("gbsApelido", usuarios));
+    criteria.add(Restrictions.eq("gbsNome", usuarios));
+    criteria.add(Restrictions.eq("gbsSenha", senha));
     GhsUsuarios usuarioAprovado = (GhsUsuarios) criteria.uniqueResult();
     session.getTransaction().commit();
         return usuarioAprovado;
