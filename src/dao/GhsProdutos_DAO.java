@@ -81,7 +81,7 @@ public List listNome(String nome){
         
     session.beginTransaction();
     Criteria crit = session.createCriteria(GhsProdutos.class);
-    crit.add(Restrictions.ge("ghsQuantidade", quantidade));
+    crit.add(Restrictions.gt("ghsQuantidade", quantidade));
     List results = crit.list();
     session.getTransaction().commit();
     return results;
@@ -93,7 +93,7 @@ public List listNome(String nome){
     session.beginTransaction();
     Criteria crit = session.createCriteria(GhsProdutos.class);
     crit.add(Restrictions.like("ghsNome", nome, MatchMode.ANYWHERE));
-    crit.add(Restrictions.ge("ghsQuantidade", quantidade));
+    crit.add(Restrictions.gt("ghsQuantidade", quantidade));
     List results = crit.list();
     session.getTransaction().commit();
     return results;

@@ -41,7 +41,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         
         ghsCliente_DAO = new GhsCliente_DAO();
         
-        Util.habilitar(false, jBtnConfirmar, jBtnCancelar, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(false, jBtnConfirmar, jBtnCancelar, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
         Util.habilitar(true, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
      
         setLocationRelativeTo(null);
@@ -71,7 +71,7 @@ public class JDlgCliente extends javax.swing.JDialog {
          ghsCliente.setGhsNome(ghs_nome.getText());
          ghsCliente.setGhsCpf(ghs_cpf.getText());
         ghsCliente.setGbsRg(gbs_rg.getText());
-         ghsCliente.setGbsSexo(gbs_sexo.getText());
+        ghsCliente.setGbsSexo(ghs_sexo.getSelectedIndex());
          
          ghsCliente.setGbsDataNascimento( Util.strDate(gbs_dataNascimento.getText()));
          ghsCliente.setGbsEmail(gbs_email.getText());
@@ -97,7 +97,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         ghs_nome.setText(ghsCliente.getGhsNome());
         ghs_cpf.setText(ghsCliente.getGhsCpf());
         gbs_rg.setText(ghsCliente.getGbsRg());
-        gbs_sexo.setText(ghsCliente.getGbsSexo());
+        ghs_sexo.setSelectedIndex(ghsCliente.getGbsSexo());
        gbs_dataNascimento.setText( Util.Datestr(ghsCliente.getGbsDataNascimento()));
         gbs_email.setText(ghsCliente.getGbsEmail());
         gbs_endereco.setText(ghsCliente.getGbsEndereco());
@@ -143,7 +143,6 @@ public class JDlgCliente extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         gbs_idade = new javax.swing.JFormattedTextField();
         jBtnPesquisar = new javax.swing.JButton();
-        gbs_sexo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -160,6 +159,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         gbs_bairro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         ghs_cpf = new javax.swing.JFormattedTextField();
+        ghs_sexo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -249,6 +249,8 @@ public class JDlgCliente extends javax.swing.JDialog {
 
         jLabel2.setText("CPF");
 
+        ghs_sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "masculino", "feminino" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -286,7 +288,7 @@ public class JDlgCliente extends javax.swing.JDialog {
                                                         .addComponent(jLabel15)
                                                         .addComponent(jLabel4)
                                                         .addComponent(gbs_telefoneResidencial, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                                        .addComponent(gbs_sexo))))
+                                                        .addComponent(ghs_sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                             .addGap(36, 36, 36))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,7 +360,7 @@ public class JDlgCliente extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gbs_idade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gbs_celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gbs_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ghs_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -405,16 +407,17 @@ public class JDlgCliente extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jBtnConfirmar, jBtnCancelar, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(true, jBtnConfirmar, jBtnCancelar, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         incluindo = true;
 
-        Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, jBtnConfirmar, jBtnCancelar, ghs_cep);
+        Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, jBtnConfirmar, jBtnCancelar, ghs_cep);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         incluindo = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -429,8 +432,8 @@ public class JDlgCliente extends javax.swing.JDialog {
                 Util.mensagem("Exclusão cancelada");
             }
             
-        Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
-        Util.habilitar(false, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(false, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         
     }//GEN-LAST:event_jBtnExcluirActionPerformed
@@ -444,16 +447,17 @@ public class JDlgCliente extends javax.swing.JDialog {
                ghsCliente_DAO.update(ghsCliente);
                 }
            Util.habilitar(false);
-        Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
-        Util.habilitar(false, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(false,  jBtnCancelar, jBtnConfirmar, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-       Util.habilitar(false);
-       Util.mensagem("Cancelamento concluido");
-       Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, gbs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.mensagem("Cancelamento concluido");
+       Util.habilitar(false, idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+       Util.limparCampos(idgbs_cliente, ghs_nome, gbs_rg, ghs_cpf, ghs_sexo, gbs_dataNascimento, gbs_email, gbs_endereco, gbs_bairro, gbs_cidade, gbs_telefoneResidencial, gbs_celular, gbs_estado, gbs_idade, gbs_regiao, ghs_cep);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
@@ -520,11 +524,11 @@ public class JDlgCliente extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField gbs_idade;
     private javax.swing.JTextField gbs_regiao;
     private javax.swing.JFormattedTextField gbs_rg;
-    private javax.swing.JTextField gbs_sexo;
     private javax.swing.JFormattedTextField gbs_telefoneResidencial;
     private javax.swing.JFormattedTextField ghs_cep;
     private javax.swing.JFormattedTextField ghs_cpf;
     private javax.swing.JTextField ghs_nome;
+    private javax.swing.JComboBox<String> ghs_sexo;
     private javax.swing.JTextField idgbs_cliente;
     private javax.swing.JButton jBtnAlterar;
     private javax.swing.JButton jBtnCancelar;

@@ -29,7 +29,7 @@ public class GhsCliente  implements java.io.Serializable {
      private String ghsNome;
      private String ghsCpf;
      private String gbsRg;
-     private String gbsSexo;
+     private int gbsSexo;
      private Date gbsDataNascimento;
      private String gbsEmail;
      private String gbsEndereco;
@@ -46,7 +46,7 @@ public class GhsCliente  implements java.io.Serializable {
     }
 
 	
-    public GhsCliente(int idgbsCliente, String ghsNome, String ghsCpf, String gbsRg, String gbsSexo, Date gbsDataNascimento, String gbsEmail, String gbsEndereco, String gbsBairro, String gbsCidade, String gbsCelular, String gbsEstado, int gbsIdade) {
+    public GhsCliente(int idgbsCliente, String ghsNome, String ghsCpf, String gbsRg, int gbsSexo, Date gbsDataNascimento, String gbsEmail, String gbsEndereco, String gbsBairro, String gbsCidade, String gbsCelular, String gbsEstado, int gbsIdade) {
         this.idgbsCliente = idgbsCliente;
         this.ghsNome = ghsNome;
         this.ghsCpf = ghsCpf;
@@ -60,23 +60,6 @@ public class GhsCliente  implements java.io.Serializable {
         this.gbsCelular = gbsCelular;
         this.gbsEstado = gbsEstado;
         this.gbsIdade = gbsIdade;
-    }
-    public GhsCliente(int idgbsCliente, String ghsNome, String ghsCpf, String gbsRg, String gbsSexo, Date gbsDataNascimento, String gbsEmail, String gbsEndereco, String gbsBairro, String gbsCidade, String gbsTelefoneResidencial, String gbsCelular, String gbsEstado, int gbsIdade, String gbsRegiao) {
-       this.idgbsCliente = idgbsCliente;
-       this.ghsNome = ghsNome;
-       this.ghsCpf = ghsCpf;
-       this.gbsRg = gbsRg;
-       this.gbsSexo = gbsSexo;
-       this.gbsDataNascimento = gbsDataNascimento;
-       this.gbsEmail = gbsEmail;
-       this.gbsEndereco = gbsEndereco;
-       this.gbsBairro = gbsBairro;
-       this.gbsCidade = gbsCidade;
-       this.gbsTelefoneResidencial = gbsTelefoneResidencial;
-       this.gbsCelular = gbsCelular;
-       this.gbsEstado = gbsEstado;
-       this.gbsIdade = gbsIdade;
-       this.gbsRegiao = gbsRegiao;
     }
    
      @Id 
@@ -122,12 +105,12 @@ public class GhsCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="gbs_sexo", nullable=false, length=10)
-    public String getGbsSexo() {
+    @Column(name="gbs_sexo", nullable=false)
+    public int getGbsSexo() {
         return this.gbsSexo;
     }
     
-    public void setGbsSexo(String gbsSexo) {
+    public void setGbsSexo(int gbsSexo) {
         this.gbsSexo = gbsSexo;
     }
 
@@ -236,6 +219,15 @@ public class GhsCliente  implements java.io.Serializable {
         return getGhsNome();
     }
     
+    @Override
+    public boolean equals (Object object){
+    if(object instanceof GhsCliente){
+        GhsCliente ghsCliente = (GhsCliente) object;
+    if(this.getIdgbsCliente()==ghsCliente.getIdgbsCliente()){
+    return true;
+    } }
+    return false;
+}
 
 }
 

@@ -34,7 +34,7 @@ public class VendasControle extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 8;
     }
 
     @Override
@@ -52,6 +52,22 @@ public class VendasControle extends AbstractTableModel {
         
          if (columnIndex == 3 ) {
             return vendas.getGhsFormaPagamento();
+        }
+         
+          if (columnIndex == 4 ) {
+            return vendas.getGhsDataVenda();
+        }
+          
+           if (columnIndex == 5 ) {
+            return vendas.getGhsCliente();
+        }
+           
+            if (columnIndex == 6 ) {
+            return vendas.getGhsVendedor();
+        }
+            
+           if (columnIndex == 7 ) {
+           return vendas.getGhsStatusVenda();
         }
         
          return "";
@@ -73,6 +89,22 @@ public class VendasControle extends AbstractTableModel {
         
         if(column == 3 ){
             return "FORMA_PAGAMENTO";
+        }
+        
+        if(column == 4 ){
+            return "DATA_VENDA";
+        }
+        
+        if(column == 5 ){
+            return "CLIENTES";
+        }
+        
+        if(column == 6 ){
+            return "VENDEDORES";
+        }
+        
+        if(column == 7 ){
+            return "STATUS_VENDA";
         }
         
         return "";

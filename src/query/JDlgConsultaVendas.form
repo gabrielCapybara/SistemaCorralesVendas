@@ -52,17 +52,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="ghs_formaPagamento" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="ghs_dataVenda" min="-2" pref="120" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="ghs_dataVenda" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="ghs_valorTotal" min="-2" pref="126" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jBtnConsultar" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -80,8 +80,8 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ghs_formaPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBtnConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ghs_valorTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ghs_dataVenda" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
@@ -92,10 +92,8 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Forma de Pagamento"/>
+            <Property name="text" type="java.lang.String" value="Data da Venda"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="ghs_formaPagamento">
         </Component>
         <Component class="javax.swing.JButton" name="jBtnConsultar">
           <Properties>
@@ -107,8 +105,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data"/>
+            <Property name="text" type="java.lang.String" value="Valor Total"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="ghs_valorTotal">
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="ghs_dataVenda">
         </Component>

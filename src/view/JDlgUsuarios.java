@@ -167,7 +167,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
         jLabel2.setText("Nome");
 
-        gbs_nivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gbs_nivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Usuario" }));
         gbs_nivel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gbs_nivelActionPerformed(evt);
@@ -341,7 +341,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         else{
                ghsUsuarios_DAO.update(ghsUsuarios);
                 }
-           Util.habilitar(true, jBtnAlterar, jBtnIncluir, jBtnPesquisar );
+        Util.habilitar(true, jBtnAlterar, jBtnIncluir, jBtnPesquisar, jBtbExcluir );
+        Util.habilitar(false, idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha, jBtnConfirmar, jBtnCancelar);
         Util.limparCampos(idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
@@ -353,7 +354,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
        JDlgUsuarioPesquisa jDlgUsuarioPesquisa = new JDlgUsuarioPesquisa(null, true);
         jDlgUsuarioPesquisa.setTelaAnterior(this);
         jDlgUsuarioPesquisa.setVisible(true);
-        Util.habilitar(true, jBtnAlterar, jBtnCancelar, jBtbExcluir, jBtnIncluir);
+       // Util.habilitar(true, jBtnAlterar, jBtnCancelar, jBtbExcluir, jBtnIncluir);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void gbs_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gbs_senhaActionPerformed
@@ -386,15 +387,19 @@ public class JDlgUsuarios extends javax.swing.JDialog {
             } else {
                 Util.mensagem("Exclusão cancelada");
             }
-            
+        Util.habilitar(false, idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtbExcluir, jBtnPesquisar);
         Util.limparCampos(idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
 
     }//GEN-LAST:event_jBtbExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha, jBtnConfirmar, jBtnCancelar);
+
+        Util.habilitar(true, idgbs_usuarios, gbs_nome, gbs_apelido, gbs_cpf, gbs_dataNascimento, gbs_nivel, gbs_ativo, jBtnConfirmar, jBtnCancelar, gbs_senha);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtbExcluir, jBtnPesquisar);
         incluindo = false;
+        
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void gbs_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gbs_cpfActionPerformed

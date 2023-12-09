@@ -8,6 +8,7 @@ package view;
 import query.JDlgConsultaCliente;
 import query.JDlgConsultaProdutos;
 import query.JDlgConsultaUsuarios;
+import query.JDlgConsultaVendas;
 import query.JDlgConsultaVendedor;
 
 /**
@@ -56,6 +57,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         jConsult1 = new javax.swing.JMenuItem();
         jConsult2 = new javax.swing.JMenuItem();
         jConsult3 = new javax.swing.JMenuItem();
+        jConsult5 = new javax.swing.JMenuItem();
         jConsult4 = new javax.swing.JMenuItem();
         jMnuMovimento = new javax.swing.JMenu();
         jMnuVendas = new javax.swing.JMenuItem();
@@ -207,6 +209,16 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         });
         jMnuConsultas.add(jConsult3);
 
+        jConsult5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jConsult5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/etiqueta-de-venda.png"))); // NOI18N
+        jConsult5.setText("Vendas");
+        jConsult5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsult5ActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jConsult5);
+
         jConsult4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         jConsult4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/vendedor.png"))); // NOI18N
         jConsult4.setText("Vendedor");
@@ -334,6 +346,12 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_Tool4ActionPerformed
 
+    private void jConsult5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsult5ActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaVendas jDlgConsultaVendas = new JDlgConsultaVendas(null,true);
+        jDlgConsultaVendas.setVisible(true);
+    }//GEN-LAST:event_jConsult5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -378,6 +396,7 @@ public class JFrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jConsult2;
     private javax.swing.JMenuItem jConsult3;
     private javax.swing.JMenuItem jConsult4;
+    private javax.swing.JMenuItem jConsult5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMnuCadastros;
     private javax.swing.JMenuItem jMnuClientes;

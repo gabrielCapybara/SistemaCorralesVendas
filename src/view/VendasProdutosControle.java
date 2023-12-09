@@ -5,6 +5,7 @@
  */
 package view;
 
+import bean.GhsVendasProdutos;
 import bean.GhsVendedor;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -13,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author u07875424151
  */
-public class VendedorControle extends AbstractTableModel {
+public class VendasProdutosControle extends AbstractTableModel {
     
     private List lista;
     
@@ -22,10 +23,30 @@ public void setList(List lista){
     this.fireTableDataChanged();
     }
     
-    public GhsVendedor getBean(int row){
-    return (GhsVendedor) lista.get(row);
+    public GhsVendasProdutos getBean(int row){
+    return (GhsVendasProdutos) lista.get(row);
+
+    }
+    
+    public void addBean(GhsVendasProdutos ghsVendasProdutos){
+        lista.add(ghsVendasProdutos);
+        this.fireTableDataChanged();
+    }
+    
+    public void removeBean (int index){
+        lista.remove(index);
+        this.fireTableDataChanged();
+    }
+    
+    
+    public void updateBean(int index, GhsVendasProdutos ghsVendasProdutos ){
+        lista.set(index, ghsVendasProdutos);
+        this.fireTableDataChanged();
+        
     
     }
+    
+  
     
     @Override
     public int getRowCount() {
@@ -34,26 +55,23 @@ public void setList(List lista){
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-       GhsVendedor vendedor =(GhsVendedor) lista.get(rowIndex);
+       GhsVendasProdutos vendasProdutos =(GhsVendasProdutos) lista.get(rowIndex);
          if (columnIndex == 0 ) {
-            return vendedor.getIdghsVendedor();
+            return vendasProdutos.getIdghsVendasProdutos();
         }
         if (columnIndex == 1 ) {
-            return vendedor.getGhsNome();
+            return vendasProdutos.getGhsProdutos();
         }
         if (columnIndex == 2 ) {
-            return vendedor.getGhsEmail();
+            return vendasProdutos.getGhsQuantidade();
         }
         if (columnIndex == 3 ) {
-            return vendedor.getGhsCpf();
-        }
-        if (columnIndex == 4 ) {
-            return vendedor.getGhsDataNascimento();
+            return vendasProdutos.getGhsValorUnitario();
         }
          return "";
     }
@@ -65,19 +83,15 @@ public void setList(List lista){
         }
         
         if(column == 1 ){
-            return "NOME";
+            return "PRODUTOS";
         }
         
         if(column == 2 ){
-            return "APELIDO";
+            return "QUANTIDADE";
         }
         
         if(column == 3 ){
-            return "CPF";
-        }
-        
-        if(column == 4 ){
-            return "DATA";
+            return "VALOR_UNITARIO";
         }
         
         return "";

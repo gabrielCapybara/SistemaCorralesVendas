@@ -126,7 +126,20 @@ public class GhsUsuarios  implements java.io.Serializable {
         this.gbsAtivo = gbsAtivo;
     }
 
-
+  @Override
+    public String toString(){
+        return getGbsNome();
+    }
+    
+    @Override
+    public boolean equals (Object object){
+    if(object instanceof GhsUsuarios){
+        GhsUsuarios ghsUsuarios = (GhsUsuarios) object;
+    if(this.getIdgbsUsuarios()==ghsUsuarios.getIdgbsUsuarios()){
+    return true;
+    } }
+    return false;
+}
 
 
 }

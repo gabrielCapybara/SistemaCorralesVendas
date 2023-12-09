@@ -26,7 +26,7 @@ public class JDlgVendasPesquisa extends javax.swing.JDialog {
         initComponents();
         
         
-        setTitle("Vendas Grupos");
+        setTitle("Pesquisar de vendas");
         setLocationRelativeTo(null);
         vendasControle = new VendasControle();
         ghsVendas_DAO = new GhsVendas_DAO();

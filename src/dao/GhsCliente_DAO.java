@@ -20,29 +20,28 @@ public class GhsCliente_DAO extends DAO_Abstract{
 
     @Override
     public void insert(Object object) {
-       session.beginTransaction();
-      session.save(object);
-      session.beginTransaction().commit();
+        session.beginTransaction();
+        session.save(object);
+        session.getTransaction().commit();
     }
 
     @Override
     public void update(Object object) {
         session.beginTransaction();
-      session.flush();
-      session.clear();
-      session.update(object);
-      session.beginTransaction().commit();
+        session.flush();
+        session.clear();
+        session.update(object);
+        session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-         session.beginTransaction();
-          session.flush();
-      session.clear();
-      session.delete(object);
-      session.beginTransaction().commit();
+        session.beginTransaction();
+        session.flush();
+        session.clear();
+        session.delete(object);
+        session.getTransaction().commit();
     }
-    
 
     @Override
     public Object list(int id) {
@@ -56,46 +55,39 @@ public class GhsCliente_DAO extends DAO_Abstract{
 
     @Override
     public List listAll() {
-       session.beginTransaction();
+        session.beginTransaction();
         Criteria criteria = session.createCriteria(GhsCliente.class);
-         List lista = criteria.list();
+        List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
-        
-}
+    }
 
-public List listNome(String nome){
-        
-    session.beginTransaction();
-    Criteria crit = session.createCriteria(GhsCliente.class);
-    crit.add(Restrictions.like("ghsNome", nome, MatchMode.ANYWHERE));
-    List results = crit.list();
-    session.getTransaction().commit();
-    return results;
-    
+    public List listNome(String nome) {
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(GhsCliente.class);
+        crit.add(Restrictions.like("ghsNome", nome, MatchMode.ANYWHERE));
+        List results = crit.list();
+        session.getTransaction().commit();
+        return results;
     }
-    
-    public List listIdade(int idade){
-        
-    session.beginTransaction();
-    Criteria crit = session.createCriteria(GhsCliente.class);
-    crit.add(Restrictions.ge("gbsIdade", idade));
-    List results = crit.list();
-    session.getTransaction().commit();
-    return results;
-    
+
+    public List listIdade(int idade) {
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(GhsCliente.class);
+        crit.add(Restrictions.ge("gbsIdade", idade));
+        List results = crit.list();
+        session.getTransaction().commit();
+        return results;
     }
-    
-    public List listNomeEIdade(String nome, int idade){
-        
-    session.beginTransaction();
-    Criteria crit = session.createCriteria(GhsCliente.class);
-    crit.add(Restrictions.like("ghsNome", nome, MatchMode.ANYWHERE));
-    crit.add(Restrictions.ge("gbsIdade", idade));
-    List results = crit.list();
-    session.getTransaction().commit();
-    return results;
-    
+
+    public List listNomeEIdade(String nome, int idade) {
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(GhsCliente.class);
+        crit.add(Restrictions.like("ghsNome", nome, MatchMode.ANYWHERE));
+        crit.add(Restrictions.ge("gbsIdade", idade));
+        List results = crit.list();
+        session.getTransaction().commit();
+        return results;
     }
 
 

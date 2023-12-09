@@ -20,6 +20,7 @@ public class JDlgVendedorNovo extends javax.swing.JDialog {
      JDlgVendedorNovoIA jDlgVendedorNovoIA;
      VendedorControle vendedorControle;
      GhsVendedor_DAO ghsVendedor_DAO;
+     private boolean incluindo;
     
     /**
      * Creates new form JDlgVendedor
@@ -41,6 +42,12 @@ public class JDlgVendedorNovo extends javax.swing.JDialog {
         jTable1.setModel(vendedorControle);
     }
 
+    public int getSelectedRowProd() {
+        return jTable1.getSelectedRow();
+    
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,12 +131,23 @@ public class JDlgVendedorNovo extends javax.swing.JDialog {
         // TODO add your handling code here:
          jDlgVendedorNovoIA.setTitle("Incluindo de Vendedores");
        jDlgVendedorNovoIA.setVisible(true);
+        List lista = ghsVendedor_DAO .listAll();
+        vendedorControle.setList(lista);
+    
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
- jDlgVendedorNovoIA.setTitle("Alteração  de Vendedores");
-       jDlgVendedorNovoIA.setVisible(true);
+        int rowSel = jTable1.getSelectedRow();
+         jDlgVendedorNovoIA.setTitle("Alterar de Vendedores");
+
+         int sel = jTable1.getSelectedRow();
+       ghsVendedor = vendedorControle.getBean(sel);
+        jDlgVendedorNovoIA.beanView(ghsVendedor);
+        jDlgVendedorNovoIA.setVisible(true); 
+        
+        List lista = ghsVendedor_DAO .listAll();
+        vendedorControle.setList(lista);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed

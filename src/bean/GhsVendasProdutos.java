@@ -5,6 +5,8 @@ package bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,12 +28,12 @@ public class GhsVendasProdutos  implements java.io.Serializable {
      private GhsVendas ghsVendas;
      private double ghsQuantidade;
      private double ghsValorUnitario;
-     private String ghsStatusVenda;
+     private int ghsStatusVenda;
 
     public GhsVendasProdutos() {
     }
 
-    public GhsVendasProdutos(int idghsVendasProdutos, GhsProdutos ghsProdutos, GhsVendas ghsVendas, double ghsQuantidade, double ghsValorUnitario, String ghsStatusVenda) {
+    public GhsVendasProdutos(int idghsVendasProdutos, GhsProdutos ghsProdutos, GhsVendas ghsVendas, double ghsQuantidade, double ghsValorUnitario, int ghsStatusVenda) {
        this.idghsVendasProdutos = idghsVendasProdutos;
        this.ghsProdutos = ghsProdutos;
        this.ghsVendas = ghsVendas;
@@ -40,7 +42,7 @@ public class GhsVendasProdutos  implements java.io.Serializable {
        this.ghsStatusVenda = ghsStatusVenda;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY) 
 
     
     @Column(name="idghs_vendas_produtos", unique=true, nullable=false)
@@ -52,7 +54,7 @@ public class GhsVendasProdutos  implements java.io.Serializable {
         this.idghsVendasProdutos = idghsVendasProdutos;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="idghs_produtos", nullable=false)
     public GhsProdutos getGhsProdutos() {
         return this.ghsProdutos;
@@ -62,7 +64,7 @@ public class GhsVendasProdutos  implements java.io.Serializable {
         this.ghsProdutos = ghsProdutos;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="idghs_vendas", nullable=false)
     public GhsVendas getGhsVendas() {
         return this.ghsVendas;
@@ -93,12 +95,12 @@ public class GhsVendasProdutos  implements java.io.Serializable {
     }
 
     
-    @Column(name="ghs_statusVenda", nullable=false, length=45)
-    public String getGhsStatusVenda() {
+    @Column(name="ghs_statusVenda", nullable=false)
+    public int getGhsStatusVenda() {
         return this.ghsStatusVenda;
     }
     
-    public void setGhsStatusVenda(String ghsStatusVenda) {
+    public void setGhsStatusVenda(int ghsStatusVenda) {
         this.ghsStatusVenda = ghsStatusVenda;
     }
 

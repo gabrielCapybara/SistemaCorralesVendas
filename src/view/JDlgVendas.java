@@ -7,12 +7,15 @@ package view;
 
 import bean.GhsCliente;
 import bean.GhsVendas;
+import bean.GhsVendasProdutos;
 import bean.GhsVendedor;
 import dao.GhsCliente_DAO;
+import dao.GhsVendasProdutos_DAO;
 import dao.GhsVendas_DAO;
 import dao.GhsVendedor_DAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +34,9 @@ public class JDlgVendas extends javax.swing.JDialog {
     GhsVendas_DAO ghsVendas_DAO;
     GhsCliente_DAO ghsCliente_DAO;
     GhsVendedor_DAO ghsVendedor_DAO;
+    GhsVendasProdutos ghsVendasProdutos;
+    GhsVendasProdutos_DAO ghsVendasProdutos_DAO;
+    VendasProdutosControle vendasProdutosControle;
     MaskFormatter mascaraData;
     
     /**
@@ -44,8 +50,18 @@ public class JDlgVendas extends javax.swing.JDialog {
         
         ghsCliente_DAO = new GhsCliente_DAO();
         ghsVendedor_DAO = new GhsVendedor_DAO();
+        ghsVendas_DAO = new GhsVendas_DAO();
+        ghsVendasProdutos = new GhsVendasProdutos();
+        ghsVendasProdutos_DAO = new GhsVendasProdutos_DAO();
+        vendasProdutosControle = new VendasProdutosControle();
         List lista = ghsCliente_DAO.listAll();
         List lista2 = ghsVendedor_DAO.listAll();
+        List lista3 = new ArrayList();
+         vendasProdutosControle.setList(lista3);
+        jTable2.setModel( vendasProdutosControle);
+        
+        Util.habilitar(false, jBtnConfirmar, jBtnCancelar, idghs_vendas, idgbs_cliente, ghs_formaPagamento, ghs_statusVenda, ghs_dataVenda, idghs_vendas, idghs_vendedor, ghs_valorTotal, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
+        Util.habilitar(true, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar, jTable2);
         
         for (int i = 0; i < lista.size(); i++) {
             GhsCliente ghsCliente = (GhsCliente) lista.get(i);
@@ -55,10 +71,8 @@ public class JDlgVendas extends javax.swing.JDialog {
             GhsVendedor ghsVendedor = (GhsVendedor) lista2.get(j);
             idghs_vendedor.addItem(ghsVendedor);    
         
-    
-        Util.habilitar(false, jBtnConfirmar, jBtnCancelar, idghs_vendas, idgbs_cliente, ghs_dataVenda, idghs_vendas, idghs_vendedor, ghs_valorTotal, jTable1, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
-        Util.habilitar(true, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
         
+         
         try {
             mascaraData = new MaskFormatter("##/##/####");
        } catch (ParseException ex) {
@@ -68,20 +82,21 @@ public class JDlgVendas extends javax.swing.JDialog {
         ghs_dataVenda.setFormatterFactory( new DefaultFormatterFactory(mascaraData));
         
     }
-    }
+    }  
+        
 
      public GhsVendas viewBean(){
         GhsVendas ghsVendas = new GhsVendas();   
      
         ghsVendas.setIdghsVendas(Util.strInt(idghs_vendas.getText()));
-        ghsVendas.setGhsDataVenda(Util.strDate(ghs_dataVenda.getText()));
-        GhsCliente clienteSelecionado = (GhsCliente) idgbs_cliente.getSelectedItem();
-        ghsVendas.setGhsCliente(clienteSelecionado);
-        GhsVendedor vendedorSelecionado = (GhsVendedor) idghs_vendedor.getSelectedItem();
-        ghsVendas.setGhsVendedor(vendedorSelecionado);
-        
+        ghsVendas.setGhsDataVenda(Util.strDate(ghs_dataVenda.getText()));   
+        ghsVendas.setGhsCliente((GhsCliente) idgbs_cliente.getSelectedItem() );
+        ghsVendas.setGhsVendedor((GhsVendedor) idghs_vendedor.getSelectedItem() );
         ghsVendas.setGhsValorTotal(Util.strDouble(ghs_valorTotal.getText()));
-          
+        ghsVendas.setGhsFormaPagamento(ghs_formaPagamento.getSelectedIndex());
+        ghsVendas.setGhsStatusVenda(ghs_statusVenda.getSelectedIndex());
+        
+        
          return ghsVendas;
       
        }
@@ -89,13 +104,22 @@ public class JDlgVendas extends javax.swing.JDialog {
       public void beanView(GhsVendas ghsVendas) {
       idghs_vendas.setText( Util.intStr(ghsVendas.getIdghsVendas()));
       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-      ghs_dataVenda.setText( Util.Datestr(ghsVendas.getGhsDataVenda()));
+      ghs_dataVenda.setText( Util.Datestr(ghsVendas.getGhsDataVenda()));  
       idgbs_cliente.setSelectedItem(ghsVendas.getGhsCliente());
       idghs_vendedor.setSelectedItem(ghsVendas.getGhsVendedor());
       ghs_valorTotal.setText(Util.doubleStr(ghsVendas.getGhsValorTotal()));
+      ghs_formaPagamento.setSelectedIndex(ghsVendas.getGhsFormaPagamento());
+      ghs_statusVenda.setSelectedIndex(ghsVendas.getGhsStatusVenda());
       
+      GhsVendasProdutos_DAO ghsVendasProdutos_DAO = new GhsVendasProdutos_DAO();
+      List listaProd = (List) ghsVendasProdutos_DAO.listProdutos(ghsVendas);
+
+      vendasProdutosControle.setList(listaProd);
     }
 
+    public int getSelectedRowProd() {
+        return jTable2.getSelectedRow();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,14 +129,14 @@ public class JDlgVendas extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
         ghs_valorTotal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         idghs_vendas = new javax.swing.JTextField();
         jBtnIncluir1 = new javax.swing.JButton();
         ghs_dataVenda = new javax.swing.JFormattedTextField();
@@ -127,6 +151,14 @@ public class JDlgVendas extends javax.swing.JDialog {
         jBtnPesquisar = new javax.swing.JButton();
         idgbs_cliente = new javax.swing.JComboBox<GhsCliente>();
         idghs_vendedor = new javax.swing.JComboBox<GhsVendedor>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        ghs_formaPagamento = new javax.swing.JComboBox<>();
+        ghs_statusVenda = new javax.swing.JComboBox<>();
+
+        jScrollPane2.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -145,19 +177,6 @@ public class JDlgVendas extends javax.swing.JDialog {
         jLabel4.setText("Vendedor");
 
         jLabel5.setText("Total");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "PRODUTO", "QUANTIDADE", "VALOR UNITARIO", "TOTAL"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         jBtnIncluir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/incluir.png"))); // NOI18N
         jBtnIncluir1.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +290,28 @@ public class JDlgVendas extends javax.swing.JDialog {
             }
         });
 
+        jLabel6.setText("Forma de pagamento");
+
+        jLabel7.setText("Status da Venda");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jScrollPane1.setViewportView(jTable2);
+
+        ghs_formaPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credito", "Debito", "Pix", "Boleto" }));
+
+        ghs_statusVenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aprovada", "Cancelada", "Completa", "Abandonada" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -288,46 +329,54 @@ public class JDlgVendas extends javax.swing.JDialog {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(idgbs_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                            .addComponent(idgbs_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(idghs_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ghs_valorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel6)
+                            .addComponent(ghs_formaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBtnIncluir1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBtnAlterar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBtbExcluir1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel7)
+                            .addComponent(ghs_statusVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(ghs_valorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnIncluir1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAlterar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtbExcluir1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(2, 2, 2)))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idghs_vendas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ghs_dataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ghs_valorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idgbs_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idghs_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idghs_vendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ghs_formaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ghs_statusVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -335,10 +384,9 @@ public class JDlgVendas extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBtnAlterar1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtbExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 169, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                        .addComponent(jBtbExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -346,66 +394,144 @@ public class JDlgVendas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+        ghsVendas = new GhsVendas();
         JDlgVendasPesquisa jDlgVendasPesquisa = new JDlgVendasPesquisa(null, true);
         jDlgVendasPesquisa.setTelaAnterior(this);
         jDlgVendasPesquisa.setVisible(true);
+        
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-         Util.habilitar(true, idghs_vendas, ghs_dataVenda, idghs_vendas, idgbs_cliente, idghs_vendedor, ghs_valorTotal, jBtnConfirmar, jBtnCancelar, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
+        Util.limparCampos(idghs_vendas, ghs_dataVenda, idgbs_cliente, ghs_formaPagamento, ghs_statusVenda, idghs_vendas, idghs_vendedor, ghs_valorTotal, jTable2); 
+        vendasProdutosControle.setList(new ArrayList());
+        idghs_vendas.grabFocus();
+        incluindo = true;
+        ghsVendas = new GhsVendas();
+        
+        Util.habilitar(true, idghs_vendas, ghs_dataVenda, idghs_vendas, ghs_formaPagamento, jTable2, ghs_statusVenda, idgbs_cliente, idghs_vendedor, ghs_valorTotal, jBtnConfirmar, jBtnCancelar, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
         Util.habilitar(false,jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
+        
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-
+        if (ghsVendas != null) {
+            if (Util.perguntar("Deseja excluir a venda ?") == true) {
+                GhsVendasProdutos_DAO ghsVendasProdutos_DAO = new GhsVendasProdutos_DAO();
+            GhsVendasProdutos ghsVendasProdutos;
+                for (int linha = 0; linha < jTable2.getRowCount(); linha++) {
+                    ghsVendasProdutos = vendasProdutosControle.getBean(linha);
+                    ghsVendasProdutos_DAO.delete(ghsVendasProdutos);
+                }
+               ghsVendas_DAO.delete(ghsVendas);
+            }
+        } else {
+            Util.mensagem("Deve ser realizada uma pesquisa antes");
+        }
+        vendasProdutosControle.setList(new ArrayList());
+        
+        incluindo = false;
+        Util.limparCampos(idghs_vendas, ghs_dataVenda, idgbs_cliente, ghs_formaPagamento, ghs_statusVenda, idghs_vendas, idghs_vendedor, ghs_valorTotal);
+        Util.habilitar(false, idghs_vendas, ghs_dataVenda, idghs_vendas, ghs_formaPagamento, ghs_statusVenda, idgbs_cliente, idghs_vendedor, ghs_valorTotal, jBtnConfirmar, jBtnCancelar, jBtnAlterar, jBtnExcluir, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, idghs_vendas, ghs_dataVenda, idghs_vendas, idgbs_cliente, idghs_vendedor, ghs_valorTotal, jBtnConfirmar, jBtnCancelar, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
-        Util.habilitar(false,jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
+         if (ghsVendas != null) {
+             GhsVendasProdutos_DAO ghsVendasProdutos_DAO = new GhsVendasProdutos_DAO();
+                GhsVendasProdutos ghsVendasProdutos;
+                for (int linha = 0; linha < jTable2.getRowCount(); linha++) {
+                    ghsVendasProdutos = vendasProdutosControle.getBean(linha);
+                    ghsVendasProdutos_DAO.delete(ghsVendasProdutos);
+            
+                }
+        } else {
+            Util.mensagem("Deve ser realizada uma pesquisa antes");
+                }
+         incluindo = false;
+         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+         Util.habilitar(true, idghs_vendas, ghs_dataVenda, ghs_formaPagamento, ghs_statusVenda, idgbs_cliente, jBtnCancelar, idghs_vendedor, ghs_valorTotal, jBtnConfirmar, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false, idghs_vendas, ghs_dataVenda, idghs_vendas, idgbs_cliente, idghs_vendedor, ghs_valorTotal, jBtnConfirmar, jBtnCancelar, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
-        Util.habilitar(true, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
-        Util.limparCampos(idghs_vendas, ghs_dataVenda, idgbs_cliente, idghs_vendas, idghs_vendedor, ghs_valorTotal, jTable1);
+        vendasProdutosControle.setList(new ArrayList());
+        Util.mensagem("Cancelamento concluído");
+        Util.habilitar(false, idghs_vendas, ghs_dataVenda, idghs_vendas, ghs_formaPagamento, ghs_statusVenda, idgbs_cliente, idghs_vendedor, ghs_valorTotal, jBtnConfirmar, jBtnAlterar, jBtnExcluir, jBtnCancelar, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
+        Util.habilitar(true,  jBtnIncluir, jBtnPesquisar);
+        Util.limparCampos(idghs_vendas, ghs_dataVenda, idgbs_cliente, ghs_formaPagamento, ghs_statusVenda, idghs_vendas, idghs_vendedor, ghs_valorTotal);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         ghsVendas = viewBean();
         
+        
         if (incluindo == true){
             ghsVendas_DAO.insert(ghsVendas);
+            GhsVendasProdutos_DAO ghsVendasProdutos_DAO = new GhsVendasProdutos_DAO();
+            GhsVendasProdutos ghsVendasProdutos;
+             for (int linha = 0; linha < jTable2.getRowCount(); linha++) {
+                ghsVendasProdutos = vendasProdutosControle.getBean(linha);
+                ghsVendasProdutos.setGhsVendas(ghsVendas);
+                ghsVendasProdutos_DAO.insert(ghsVendasProdutos);
+             }
         } else {
-            ghsVendas_DAO.update(ghsVendas);
+           ghsVendas_DAO.update(ghsVendas);
+            GhsVendasProdutos_DAO ghsVendasProdutos_DAO = new GhsVendasProdutos_DAO();
+             GhsVendasProdutos ghsVendasProdutos;
+            for (int linha = 0; linha < jTable2.getRowCount(); linha++) {
+                ghsVendasProdutos = vendasProdutosControle.getBean(linha);
+                ghsVendasProdutos.setGhsVendas(ghsVendas);
+                ghsVendasProdutos_DAO.insert(ghsVendasProdutos);
+            }
         }
         
-        Util.habilitar(false,jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
-        Util.limparCampos(idghs_vendas, ghs_dataVenda, idgbs_cliente, idghs_vendas, idghs_vendedor, ghs_valorTotal, jTable1);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
+        Util.habilitar(false, idghs_vendas, ghs_dataVenda, idghs_vendas, ghs_formaPagamento, ghs_statusVenda, idgbs_cliente, idghs_vendedor, ghs_valorTotal, jBtnConfirmar, jBtnCancelar, jBtnAlterar, jBtnExcluir, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
+        Util.limparCampos(idghs_vendas, ghs_dataVenda, ghs_formaPagamento, ghs_statusVenda, idgbs_cliente, idghs_vendas, idghs_vendedor, ghs_valorTotal, jTable2);
+        vendasProdutosControle.setList(new ArrayList());
+
+       // ghsVendas = null;
+        
         
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnIncluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluir1ActionPerformed
         // TODO add your handling code here:
         JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
-        jDlgVendasProdutos.setTitle("Incluindo de Produtos");
+        jDlgVendasProdutos.setTitle("Incluisão de Produtos");
+        jDlgVendasProdutos.setTelaAnterior(this);
         jDlgVendasProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnIncluir1ActionPerformed
 
     private void jBtnAlterar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterar1ActionPerformed
         // TODO add your handling code here:
         JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
-        jDlgVendasProdutos.setTitle("Alterando de Produtos");
+        jDlgVendasProdutos.setTitle("Alteração de Produtos");
+        jDlgVendasProdutos.setTelaAnterior(this);
+        int linSel = jTable2.getSelectedRow();
+        GhsVendasProdutos ghsVendasProdutos = (GhsVendasProdutos)vendasProdutosControle.getBean(linSel) ;
+        jDlgVendasProdutos.beanView(ghsVendasProdutos);
         jDlgVendasProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnAlterar1ActionPerformed
 
     private void jBtbExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtbExcluir1ActionPerformed
         // TODO add your handling code here:
+        
+        if (getSelectedRowProd() == -1){
+            Util.mensagem("Nenhuma linha selecionada");
+            
+        } else {
+            if(Util.perguntar("Confirmar exclusão do produto") == true){
+                vendasProdutosControle.removeBean(getSelectedRowProd());
+            }
+        
+        }
+        
     }//GEN-LAST:event_jBtbExcluir1ActionPerformed
 
     private void ghs_valorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ghs_valorTotalActionPerformed
@@ -460,6 +586,8 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField ghs_dataVenda;
+    private javax.swing.JComboBox<String> ghs_formaPagamento;
+    private javax.swing.JComboBox<String> ghs_statusVenda;
     private javax.swing.JTextField ghs_valorTotal;
     private javax.swing.JComboBox<GhsCliente> idgbs_cliente;
     private javax.swing.JTextField idghs_vendas;
@@ -478,8 +606,12 @@ public class JDlgVendas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

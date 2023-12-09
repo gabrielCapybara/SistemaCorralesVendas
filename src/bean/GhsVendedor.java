@@ -123,6 +123,16 @@ public class GhsVendedor  implements java.io.Serializable {
         return getGhsNome();
     }
 
+    @Override
+    public boolean equals (Object object){
+    if(object instanceof GhsVendedor){
+        GhsVendedor ghsVendedor = (GhsVendedor) object;
+    if(this.getIdghsVendedor()==ghsVendedor.getIdghsVendedor()){
+    return true;
+    } }
+    return false;
+    
+}
 }
 
 

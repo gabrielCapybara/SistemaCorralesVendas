@@ -60,7 +60,7 @@
                                                       <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       <Component id="gbs_telefoneResidencial" alignment="0" pref="196" max="32767" attributes="0"/>
-                                                      <Component id="gbs_sexo" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="ghs_sexo" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -156,7 +156,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="gbs_idade" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="gbs_celular" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="gbs_sexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ghs_sexo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -330,8 +330,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnPesquisarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="gbs_sexo">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
         <Property name="text" type="java.lang.String" value="Regi&#xe3;o"/>
@@ -390,6 +388,19 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="ghs_cpf">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="ghs_sexo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="masculino"/>
+            <StringItem index="1" value="feminino"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

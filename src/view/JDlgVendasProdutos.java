@@ -5,21 +5,58 @@
  */
 package view;
 
+import bean.GhsProdutos;
+import bean.GhsVendasProdutos;
+import dao.GhsProdutos_DAO;
+import java.util.List;
+import tools.Util;
+
 /**
  *
  * @author TSUIIKUII
  */
 public class JDlgVendasProdutos extends javax.swing.JDialog {
-
+    
+    
+    GhsProdutos_DAO ghsProdutos_DAO;
+    JDlgVendas jDlgVendas;
+    VendasProdutosControle vendasProdutosControle;
+    
+    
     /**
+     * 
+     * 
      * Creates new form JDlgVendasProdutos
      */
     public JDlgVendasProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Produtos da venda");
+        ghsProdutos_DAO = new GhsProdutos_DAO();
+        List lista = (List) ghsProdutos_DAO.listAll();
+        
+        Util.habilitar(false, ghs_valorTotal );
+        
+        for (int i = 0; i < lista.size(); i++) {
+            idghs_produtos.addItem((GhsProdutos) lista.get(i));
+        }
     }
 
+     public void setTelaAnterior(JDlgVendas jDlgVendas) {
+        this.jDlgVendas = jDlgVendas;
+//        this.numVendaId = numVendaId;
+    }
+     
+
+    void beanView(GhsVendasProdutos ghsVendasProdutos) {
+        idghs_produtos.setSelectedItem(ghsVendasProdutos.getGhsProdutos());
+       ghs_quantidade.setText(Util.doubleStr(ghsVendasProdutos.getGhsQuantidade()));
+        ghs_valorUnitario.setText(Util.doubleStr(ghsVendasProdutos.getGhsValorUnitario()));
+   //     ghs_valorTotal.setText(Util.doubleStr(ghsVendasProdutos.calculaTotal()));
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +67,7 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        idghs_produtos = new javax.swing.JComboBox<>();
+        idghs_produtos = new javax.swing.JComboBox<GhsProdutos>();
         jPanel1 = new javax.swing.JPanel();
         jBtnOk = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
@@ -45,15 +82,38 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
 
         jLabel1.setText("Produtos");
 
-        idghs_produtos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        idghs_produtos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                idghs_produtosItemStateChanged(evt);
+            }
+        });
+        idghs_produtos.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                idghs_produtosAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jBtnOk.setText("OK");
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOkActionPerformed(evt);
+            }
+        });
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,6 +141,18 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         jLabel3.setText("Valor Unitário");
 
         jLabel4.setText("Total");
+
+        ghs_quantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ghs_quantidadeKeyReleased(evt);
+            }
+        });
+
+        ghs_valorUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ghs_valorUnitarioKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,6 +206,61 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void idghs_produtosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_idghs_produtosAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idghs_produtosAncestorAdded
+
+    private void idghs_produtosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_idghs_produtosItemStateChanged
+        // TODO add your handling code here:
+        ghs_quantidade.setText( "1" );
+        GhsProdutos ghsProdutos = (GhsProdutos) idghs_produtos.getSelectedItem();
+        ghs_valorUnitario.setText( Util.doubleStr( ghsProdutos.getGhsValorUnitario() ));
+        ghs_valorTotal.setText(ghs_valorUnitario.getText());
+    }//GEN-LAST:event_idghs_produtosItemStateChanged
+
+    private void ghs_quantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ghs_quantidadeKeyReleased
+        // TODO add your handling code here:
+        if (ghs_quantidade.getText().isEmpty() == false) {
+            double unitario = Util.strDouble(ghs_valorUnitario.getText());
+            double quantidade = Util.strDouble(ghs_quantidade.getText());
+            ghs_valorTotal.setText(Util.doubleStr(quantidade * unitario));
+        } else {
+            ghs_valorTotal.setText("0");
+        } 
+             
+    }//GEN-LAST:event_ghs_quantidadeKeyReleased
+
+    private void ghs_valorUnitarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ghs_valorUnitarioKeyReleased
+        // TODO add your handling code here:
+        if (ghs_valorUnitario.getText().isEmpty() == false) {
+            double quantidade = Util.strDouble(ghs_quantidade.getText());
+            double unitario = Util.strDouble(ghs_valorUnitario.getText());
+            ghs_valorTotal.setText(Util.doubleStr(unitario * quantidade));
+        } else {
+            ghs_valorTotal.setText("0");
+        } 
+    }//GEN-LAST:event_ghs_valorUnitarioKeyReleased
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
+
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+        // TODO add your handling code here:
+        GhsVendasProdutos ghsVendasProdutos = new GhsVendasProdutos();
+        ghsVendasProdutos.setGhsProdutos((GhsProdutos) idghs_produtos.getSelectedItem() );
+        ghsVendasProdutos.setGhsQuantidade(Util.strDouble(ghs_quantidade.getText() ));
+        ghsVendasProdutos.setGhsValorUnitario(Util.strDouble(ghs_valorUnitario.getText()));
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+          jDlgVendas.vendasProdutosControle.addBean(ghsVendasProdutos);
+        } else {            
+           jDlgVendas.vendasProdutosControle.updateBean(jDlgVendas.getSelectedRowProd(), ghsVendasProdutos);
+        }
+        setVisible(false);
+        
+    }//GEN-LAST:event_jBtnOkActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -180,7 +307,7 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
     private javax.swing.JTextField ghs_quantidade;
     private javax.swing.JTextField ghs_valorTotal;
     private javax.swing.JTextField ghs_valorUnitario;
-    private javax.swing.JComboBox<String> idghs_produtos;
+    private javax.swing.JComboBox<GhsProdutos> idghs_produtos;
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnOk;
     private javax.swing.JLabel jLabel1;

@@ -22,18 +22,18 @@ public class GhsVendas_DAO extends DAO_Abstract{
 
     @Override
     public void insert(Object object) {
-      Transaction transaction = session.beginTransaction();
+         Transaction transaction = session.beginTransaction();
         session.save(object);
         session.getTransaction().commit();
     }
 
-    @Override
+   @Override
     public void update(Object object) {
-     session.beginTransaction();
-      session.flush();
-      session.clear();
-      session.update(object);
-      session.getTransaction().commit();
+        session.beginTransaction();
+        session.update(object);
+        session.getTransaction().commit();
+        session.flush();
+        session.clear();
     }
 
     @Override
@@ -65,10 +65,10 @@ public class GhsVendas_DAO extends DAO_Abstract{
         return (ArrayList) lista;
 }
 
-public List listFormaPagamento(String formaPagamento) {
+public List listValorTotal(double valor) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(GhsVendas.class);
-        criteria.add(Restrictions.like("ghsFormaPagamento", "%" + formaPagamento + "%"));
+        criteria.add(Restrictions.ge("ghsValorTotal", valor));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -84,11 +84,11 @@ public List listFormaPagamento(String formaPagamento) {
         return lista;
     }
 
-    public List listFormaPagamentoEData(String formaPagamento, Date data) {
+    public List listValorTotalEData(double valor, Date date) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(GhsVendas.class);
-        criteria.add(Restrictions.like("ghsFormaPagamento", "%" + formaPagamento + "%"));
-        criteria.add(Restrictions.eq("ghsDataVenda", data));
+        criteria.add(Restrictions.ge("ghsValorTotal",  valor));
+        criteria.add(Restrictions.eq("ghsDataVenda", date));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

@@ -23,6 +23,8 @@ public class JDlgProdutosNovo extends javax.swing.JDialog {
     JDlgProdutosNovoIA jDlgProdutosNovoIA;
      ProdutosControle produtosControle;
      GhsProdutos_DAO ghsProdutos_DAO;
+     JDlgProdutosNovo jDlgProdutosNovo;
+     boolean incluindo;
     
     /**
      * Creates new form JDlgProdutos
@@ -33,14 +35,21 @@ public class JDlgProdutosNovo extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
 
-        jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null, true);
-
+     jDlgProdutosNovoIA = new JDlgProdutosNovoIA(null, true);
     produtosControle = new ProdutosControle();
     ghsProdutos_DAO = new GhsProdutos_DAO();
     List lista = ghsProdutos_DAO.listAll();
     produtosControle.setList(lista);
     jTable1.setModel(produtosControle);
+    
+    
      }
+    
+    public int getSelectedRowProd() {
+        return jTable1.getSelectedRow();
+    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,14 +130,25 @@ public class JDlgProdutosNovo extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:  
-        jDlgProdutosNovoIA.setTitle("Incluindo de Produtos");
+        jDlgProdutosNovoIA.setTitle("Incluinsão de Produtos");
         jDlgProdutosNovoIA.setVisible(true);
+         List lista = ghsProdutos_DAO .listAll();
+         produtosControle.setList(lista);
+        
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        jDlgProdutosNovoIA.setTitle("Alteração  de Produtos");
-        jDlgProdutosNovoIA.setVisible(true);
+         int rowSel = jTable1.getSelectedRow();
+         jDlgProdutosNovoIA.setTitle("Alteração de Produtos");
+         
+         int sel = jTable1.getSelectedRow();
+       ghsProdutos = produtosControle.getBean(sel);
+       jDlgProdutosNovoIA.beanView(ghsProdutos);
+        jDlgProdutosNovoIA.setVisible(true); 
+        
+         List lista = ghsProdutos_DAO .listAll();
+         produtosControle.setList(lista);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -137,12 +157,15 @@ public class JDlgProdutosNovo extends javax.swing.JDialog {
            int sel = jTable1.getSelectedRow();
            ghsProdutos = produtosControle.getBean(sel);
           ghsProdutos_DAO.delete(ghsProdutos);
-           //atulizar lista no jtable
+           //atualizar lista no jtable
            List lista = ghsProdutos_DAO.listAll();
            produtosControle.setList(lista);
+           Util.mensagem("registro excluido");
         } else{
            Util.mensagem("Exclusão cancelada");
         }
+       List lista = ghsProdutos_DAO.listAll();
+       produtosControle.setList(lista);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     /**

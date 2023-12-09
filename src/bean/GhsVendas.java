@@ -33,15 +33,15 @@ public class GhsVendas  implements java.io.Serializable {
      private GhsVendedor ghsVendedor;
      private double ghsValorTotal;
      private Date ghsDataVenda;
-     private String ghsFormaPagamento;
-     private String ghsStatusVenda;
+     private int ghsFormaPagamento;
+     private int ghsStatusVenda;
 
 
     public GhsVendas() {
     }
 
 	
-    public GhsVendas(int idghsVendas, GhsCliente ghsCliente, GhsVendedor ghsVendedor, double ghsValorTotal, Date ghsDataVenda, String ghsFormaPagamento, String ghsStatusVenda) {
+    public GhsVendas(int idghsVendas, GhsCliente ghsCliente, GhsVendedor ghsVendedor, double ghsValorTotal, Date ghsDataVenda, int ghsFormaPagamento, int ghsStatusVenda) {
         this.idghsVendas = idghsVendas;
         this.ghsCliente = ghsCliente;
         this.ghsVendedor = ghsVendedor;
@@ -65,7 +65,7 @@ public class GhsVendas  implements java.io.Serializable {
         this.idghsVendas = idghsVendas;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="idgbs_cliente", nullable=false)
     public GhsCliente getGhsCliente() {
         return this.ghsCliente;
@@ -75,7 +75,7 @@ public class GhsVendas  implements java.io.Serializable {
         this.ghsCliente = ghsCliente;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="idghs_vendedor", nullable=false)
     public GhsVendedor getGhsVendedor() {
         return this.ghsVendedor;
@@ -106,25 +106,35 @@ public class GhsVendas  implements java.io.Serializable {
     }
 
     
-    @Column(name="ghs_formaPagamento", nullable=false, length=45)
-    public String getGhsFormaPagamento() {
+    @Column(name="ghs_formaPagamento", nullable=false)
+    public int getGhsFormaPagamento() {
         return this.ghsFormaPagamento;
     }
     
-    public void setGhsFormaPagamento(String ghsFormaPagamento) {
+    public void setGhsFormaPagamento(int ghsFormaPagamento) {
         this.ghsFormaPagamento = ghsFormaPagamento;
     }
 
     
-    @Column(name="ghs_statusVenda", nullable=false, length=45)
-    public String getGhsStatusVenda() {
+    @Column(name="ghs_statusVenda", nullable=false)
+    public int getGhsStatusVenda() {
         return this.ghsStatusVenda;
     }
     
-    public void setGhsStatusVenda(String ghsStatusVenda) {
+    public void setGhsStatusVenda(int ghsStatusVenda) {
         this.ghsStatusVenda = ghsStatusVenda;
     }
-
+    
+    @Override
+    public boolean equals (Object object){
+    if(object instanceof GhsVendas){
+        GhsVendas ghsVendas = (GhsVendas) object;
+    if(this.getIdghsVendas()==ghsVendas.getIdghsVendas()){
+    return true;
+    } }
+    return false;
+}
+    
 
 }
 

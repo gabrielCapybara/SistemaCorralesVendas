@@ -46,9 +46,9 @@ private JDlgVendas jDlgVendas;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        ghs_formaPagamento = new javax.swing.JTextField();
         jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        ghs_valorTotal = new javax.swing.JTextField();
         ghs_dataVenda = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -57,7 +57,7 @@ private JDlgVendas jDlgVendas;
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Forma de Pagamento");
+        jLabel1.setText("Data da Venda");
 
         jBtnConsultar.setText("CONSULTAR");
         jBtnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +66,7 @@ private JDlgVendas jDlgVendas;
             }
         });
 
-        jLabel2.setText("Data");
+        jLabel2.setText("Valor Total");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,14 +75,14 @@ private JDlgVendas jDlgVendas;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(ghs_formaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(ghs_dataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ghs_dataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ghs_valorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnConsultar)))
                 .addContainerGap())
@@ -95,8 +95,8 @@ private JDlgVendas jDlgVendas;
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ghs_formaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnConsultar)
+                    .addComponent(ghs_valorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ghs_dataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
@@ -133,24 +133,25 @@ private JDlgVendas jDlgVendas;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-    if (ghs_formaPagamento.getText().equals("") && ghs_dataVenda.getText().equals("")) {
-    List lista = ghsVendas_DAO.listAll();
-    vendasControle.setList(lista);
-    } else {
-    if (!ghs_formaPagamento.getText().equals("") && !ghs_dataVenda.getText().equals("")) {
-        Date data = Util.strDate(ghs_dataVenda.getText());
-        List lista = ghsVendas_DAO.listFormaPagamentoEData(ghs_formaPagamento.getText(), data);
-        vendasControle.setList(lista);
-    } else {
-        if (!ghs_formaPagamento.getText().equals("")) {
-            List lista = ghsVendas_DAO.listFormaPagamento(ghs_formaPagamento.getText());
+     if (ghs_valorTotal.getText().equals("") && ghs_dataVenda.getText().equals("")) {
+            List lista = ghsVendas_DAO.listAll();
             vendasControle.setList(lista);
-        }
-        if (!ghs_formaPagamento.getText().equals("")) {
-            Date data = Util.strDate(ghs_formaPagamento.getText());
-            List lista = ghsVendas_DAO.listData(data);
-            vendasControle.setList(lista);
-        }
+        } else {
+            if (!ghs_valorTotal.getText().equals("") && !ghs_dataVenda.getText().equals("")) {
+                Date data = Util.strDate(ghs_dataVenda.getText());
+                List lista = ghsVendas_DAO.listValorTotalEData(Util.strDouble(ghs_valorTotal.getText()), data);
+                vendasControle.setList(lista);
+            } else {
+                if (!ghs_valorTotal.getText().equals("")) {
+                    List lista = ghsVendas_DAO.listValorTotal(Util.strDouble(ghs_valorTotal.getText()));
+                    vendasControle.setList(lista);
+                } else {
+                    if (!ghs_dataVenda.getText().equals("")) {
+                        Date data = Util.strDate(ghs_dataVenda.getText());
+                        List lista = ghsVendas_DAO.listData(data);
+                        vendasControle.setList(lista);
+                    }
+                }
     }
     }
        
@@ -201,7 +202,7 @@ private JDlgVendas jDlgVendas;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField ghs_dataVenda;
-    private javax.swing.JTextField ghs_formaPagamento;
+    private javax.swing.JTextField ghs_valorTotal;
     private javax.swing.JButton jBtnConsultar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

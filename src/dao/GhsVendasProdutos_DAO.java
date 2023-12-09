@@ -6,6 +6,7 @@
 package dao;
 
 
+import bean.GhsVendas;
 import bean.GhsVendasProdutos;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,4 +63,15 @@ public class GhsVendasProdutos_DAO extends DAO_Abstract{
          List lista = criteria.list();
         session.getTransaction().commit();
         return (ArrayList) lista;
-}}
+}
+
+    public List listProdutos(GhsVendas ghsVendas){
+       session.beginTransaction();
+       Criteria criteria = session.createCriteria(GhsVendasProdutos.class);
+       criteria.add(Restrictions.eq("ghsVendas", ghsVendas));
+       List lista = criteria.list();
+       session.getTransaction().commit();
+       return lista;
+}
+
+}

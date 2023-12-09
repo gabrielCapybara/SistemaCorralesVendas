@@ -9,6 +9,7 @@ import bean.GhsProdutos;
 import dao.GhsProdutos_DAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
@@ -24,7 +25,7 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
     MaskFormatter mascaraValorUni, mascaraPreco;
     GhsProdutos_DAO ghsProdutos_DAO;
     GhsProdutos ghsProdutos;
-    
+    JDlgProdutosNovo jDlgProdutosNovo;
     /**
      * Creates new form JDlgProdutosNovoIA
      */
@@ -33,7 +34,7 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         
-   
+        
  //    try {
   //          mascaraPreco = new MaskFormatter("########.##");
   //          mascaraValorUni = new MaskFormatter("########.##");
@@ -62,11 +63,16 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
         idghs_produtos.setText( Util.intStr(ghsProdutos.getIdghsProdutos()));
         ghs_nome.setText(ghsProdutos.getGhsNome());
         ghs_descricao.setText(ghsProdutos.getGhsDescricao());
-        ghs_quantidade.setText(Util.doubleStr(ghsProdutos.getGhsQuantidade()));
+        ghs_quantidade.setText(Util.intStr(ghsProdutos.getGhsQuantidade()));
         ghs_valorUnitario.setText( Util.doubleStr(ghsProdutos.getGhsValorUnitario()));
         ghs_preco.setText( Util.doubleStr(ghsProdutos.getGhsPreco()));
     }
 
+     public void setTelaAnterior(JDlgProdutosNovo jDlgProdutosNovo) {
+        this.jDlgProdutosNovo = jDlgProdutosNovo;
+        
+     }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -216,22 +222,25 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
         
-        GhsProdutos ghsProdutos = viewBean();
-
+        GhsProdutos ghsProdutos = viewBean(); 
         GhsProdutos_DAO ghsProdutos_DAO = new GhsProdutos_DAO();
-
-        ghsProdutos_DAO.insert(ghsProdutos);
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+            ghsProdutos_DAO.insert(ghsProdutos);
+           
+        } else {    
+             ghsProdutos_DAO.update(ghsProdutos);
+        }
         
-        setVisible(false);
-        //ghsProdutos = viewBean();
-       // ghsProdutos_DAO.insert(ghsProdutos);
         
+        this.dispose();
+        Util.limparCampos(idghs_produtos, ghs_nome, ghs_preco, ghs_quantidade, ghs_valorUnitario, ghs_descricao);
         
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+       this.dispose();
+       Util.limparCampos(idghs_produtos, ghs_nome, ghs_preco, ghs_quantidade, ghs_valorUnitario, ghs_descricao);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**

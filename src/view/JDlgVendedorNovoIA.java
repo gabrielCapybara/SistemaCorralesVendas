@@ -9,6 +9,7 @@ import bean.GhsVendedor;
 import dao.GhsVendedor_DAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
@@ -25,6 +26,8 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
     MaskFormatter mascaraCPF, mascaraDataNascimento, mascaraTelefone;
     GhsVendedor_DAO ghsVendedor_DAO;
     GhsVendedor ghsVendedor;
+    JDlgVendedorNovo jDlgVendedorNovo;
+
     /**
      * Creates new form JDlgVendedorNovoIA
      */
@@ -69,6 +72,13 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
         ghs_sexo.setSelectedIndex(ghsVendedor.getGhsSexo());
 
      }
+     
+      public void setTelaAnterior(JDlgVendedorNovo jDlgVendedorNovo) {
+        this.jDlgVendedorNovo = jDlgVendedorNovo;
+        
+     }
+     
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,33 +233,35 @@ public class JDlgVendedorNovoIA extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+     
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk1ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
-      //  ghsVendedor = viewBean();
-       // ghsVendedor_DAO.insert(ghsVendedor);
-       
-        GhsVendedor ghsVendedor = viewBean();
-
+      GhsVendedor ghsVendedor = viewBean(); 
         GhsVendedor_DAO ghsVendedor_DAO = new GhsVendedor_DAO();
-
-        ghsVendedor_DAO.insert(ghsVendedor);        
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+            ghsVendedor_DAO.insert(ghsVendedor);
+           
+        } else {    
+             ghsVendedor_DAO.update(ghsVendedor);
+        }
         
         
-       // setVisible(false);  
+        this.dispose();
+        Util.limparCampos(idghs_vendedor, ghs_nome, ghs_cpf, ghs_email, ghs_sexo, ghs_telefone, ghs_telefone);
+        
     }//GEN-LAST:event_jBtnOk1ActionPerformed
 
     private void jBtnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelar1ActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        this.dispose(); 
+      Util.limparCampos(idghs_vendedor, ghs_nome, ghs_cpf, ghs_email, ghs_sexo, ghs_telefone, ghs_telefone);
     }//GEN-LAST:event_jBtnCancelar1ActionPerformed
 
     /**

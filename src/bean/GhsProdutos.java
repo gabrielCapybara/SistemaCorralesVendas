@@ -106,7 +106,21 @@ public class GhsProdutos  implements java.io.Serializable {
         this.ghsValorUnitario = ghsValorUnitario;
     }
 
+    @Override
+    public String toString(){
+        return getGhsNome();
+    }
 
+    @Override
+    public boolean equals (Object object){
+    if(object instanceof GhsProdutos){
+        GhsProdutos ghsProdutos = (GhsProdutos) object;
+    if(this.getIdghsProdutos()==ghsProdutos.getIdghsProdutos()){
+    return true;
+    } }
+    return false;
+}
+    
 }
 
 
