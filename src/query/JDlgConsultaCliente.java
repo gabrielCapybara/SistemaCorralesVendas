@@ -49,6 +49,7 @@ private JDlgCliente jDlgCliente;
         jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         gbs_idade = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -67,6 +68,8 @@ private JDlgCliente jDlgCliente;
 
         jLabel2.setText("Idade");
 
+        jLabel3.setText("MAIOR ou IGUAL ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,6 +85,8 @@ private JDlgCliente jDlgCliente;
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(gbs_idade, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnConsultar)))
                 .addContainerGap())
@@ -96,7 +101,8 @@ private JDlgCliente jDlgCliente;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ghs_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnConsultar)
-                    .addComponent(gbs_idade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gbs_idade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
@@ -138,7 +144,7 @@ private JDlgCliente jDlgCliente;
             clienteControle.setList(lista);
             
         } else {
-             if(ghs_nome.getText().equals("") && !gbs_idade.getText().equals("")){
+             if(!ghs_nome.getText().equals("") && !gbs_idade.getText().equals("")){
                  List lista = ghsCliente_DAO.listNomeEIdade(ghs_nome.getText(), Util.strInt(gbs_idade.getText()));
                  clienteControle.setList(lista);
         } else {
@@ -204,6 +210,7 @@ private JDlgCliente jDlgCliente;
     private javax.swing.JButton jBtnConsultar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

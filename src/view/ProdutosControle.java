@@ -27,6 +27,12 @@ public void setList(List lista){
     
     }
     
+     public void updateBean(int index, GhsProdutos ghsProdutos){ 
+        lista.set(index, ghsProdutos);
+        this.fireTableDataChanged();
+    }
+   
+    
     @Override
     public int getRowCount() {
         return lista.size();

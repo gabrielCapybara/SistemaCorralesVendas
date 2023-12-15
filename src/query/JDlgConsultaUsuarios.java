@@ -138,7 +138,7 @@ private JDlgUsuarios jDlgUsuarios;
             usuarioControle.setList(lista);
             
         } else {
-             if(gbs_Nome.getText().equals("") && !gbs_Cpf.getText().equals("")){
+             if(!gbs_Nome.getText().equals("") && !gbs_Cpf.getText().equals("")){
                  List lista = ghsUsuarios_DAO.listNomeECpf(gbs_Nome.getText(), gbs_Cpf.getText());
                  usuarioControle.setList(lista);
         } else {

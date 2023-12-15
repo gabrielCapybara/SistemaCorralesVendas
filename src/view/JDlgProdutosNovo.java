@@ -132,6 +132,7 @@ public class JDlgProdutosNovo extends javax.swing.JDialog {
         // TODO add your handling code here:  
         jDlgProdutosNovoIA.setTitle("Incluinsão de Produtos");
         jDlgProdutosNovoIA.setVisible(true);
+        
          List lista = ghsProdutos_DAO .listAll();
          produtosControle.setList(lista);
         
@@ -139,16 +140,18 @@ public class JDlgProdutosNovo extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-         int rowSel = jTable1.getSelectedRow();
+        // int rowSel = jTable1.getSelectedRow(); 
          jDlgProdutosNovoIA.setTitle("Alteração de Produtos");
+         
          
          int sel = jTable1.getSelectedRow();
        ghsProdutos = produtosControle.getBean(sel);
        jDlgProdutosNovoIA.beanView(ghsProdutos);
-        jDlgProdutosNovoIA.setVisible(true); 
+                jDlgProdutosNovoIA.setVisible(true); 
         
-         List lista = ghsProdutos_DAO .listAll();
-         produtosControle.setList(lista);
+         
+         
+         
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed

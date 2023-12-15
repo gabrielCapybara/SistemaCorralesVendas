@@ -55,7 +55,7 @@ public void setList(List lista){
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -73,6 +73,11 @@ public void setList(List lista){
         if (columnIndex == 3 ) {
             return vendasProdutos.getGhsValorUnitario();
         }
+        
+        if (columnIndex == 4 ) {
+            return vendasProdutos.getGhsQuantidade() *  vendasProdutos.getGhsValorUnitario();
+        }
+        
          return "";
     }
     
@@ -92,6 +97,10 @@ public void setList(List lista){
         
         if(column == 3 ){
             return "VALOR_UNITARIO";
+        }
+        
+        if(column == 4 ){
+            return "TOTAL";
         }
         
         return "";

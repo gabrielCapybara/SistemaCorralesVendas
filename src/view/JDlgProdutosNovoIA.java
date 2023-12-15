@@ -25,6 +25,7 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
     MaskFormatter mascaraValorUni, mascaraPreco;
     GhsProdutos_DAO ghsProdutos_DAO;
     GhsProdutos ghsProdutos;
+    ProdutosControle produtosControle;
     JDlgProdutosNovo jDlgProdutosNovo;
     /**
      * Creates new form JDlgProdutosNovoIA
@@ -34,14 +35,13 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         
-        
- //    try {
+  //  try {
   //          mascaraPreco = new MaskFormatter("########.##");
-  //          mascaraValorUni = new MaskFormatter("########.##");
- //       } catch (ParseException ex) {
+  //         mascaraValorUni = new MaskFormatter("########.##");
+  //      } catch (ParseException ex) {
   //          Logger.getLogger(JDlgVendedorNovoIA.class.getName()).log(Level.SEVERE, null, ex);
   //      }
-  //       ghs_preco.setFormatterFactory( new DefaultFormatterFactory( mascaraPreco )); 
+  //      ghs_preco.setFormatterFactory( new DefaultFormatterFactory( mascaraPreco )); 
   //      ghs_valorUnitario.setFormatterFactory(new DefaultFormatterFactory(mascaraValorUni));
     }
         public GhsProdutos viewBean(){
@@ -221,19 +221,22 @@ public class JDlgProdutosNovoIA extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        
-        GhsProdutos ghsProdutos = viewBean(); 
-        GhsProdutos_DAO ghsProdutos_DAO = new GhsProdutos_DAO();
-        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
-            ghsProdutos_DAO.insert(ghsProdutos);
-           
-        } else {    
-             ghsProdutos_DAO.update(ghsProdutos);
+      ghsProdutos = viewBean();
+if (ghsProdutos != null) {
+    GhsProdutos_DAO ghsProdutos_DAO = new GhsProdutos_DAO();
+    if ("I".equals(getTitle().toUpperCase().substring(0, 1))) {
+        ghsProdutos_DAO.insert(ghsProdutos);
+    } else {
+        ghsProdutos_DAO.update(ghsProdutos);
+        List lista = ghsProdutos_DAO.listAll();
+        if (produtosControle != null) {
+            produtosControle.setList(lista);
         }
-        
-        
-        this.dispose();
-        Util.limparCampos(idghs_produtos, ghs_nome, ghs_preco, ghs_quantidade, ghs_valorUnitario, ghs_descricao);
+    }
+    this.dispose();
+    Util.limparCampos(idghs_produtos, ghs_nome, ghs_preco, ghs_quantidade, ghs_valorUnitario, ghs_descricao);
+}
+
         
     }//GEN-LAST:event_jBtnOkActionPerformed
 

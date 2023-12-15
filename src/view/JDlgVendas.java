@@ -271,7 +271,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jBtnIncluir)
@@ -359,7 +359,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
@@ -386,7 +386,7 @@ public class JDlgVendas extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBtbExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -425,6 +425,7 @@ public class JDlgVendas extends javax.swing.JDialog {
                     ghsVendasProdutos = vendasProdutosControle.getBean(linha);
                     ghsVendasProdutos_DAO.delete(ghsVendasProdutos);
                 }
+                ghsVendas = viewBean();
                ghsVendas_DAO.delete(ghsVendas);
             }
         } else {
@@ -432,7 +433,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         }
         vendasProdutosControle.setList(new ArrayList());
         
-        incluindo = false;
+       // incluindo = false;
         Util.limparCampos(idghs_vendas, ghs_dataVenda, idgbs_cliente, ghs_formaPagamento, ghs_statusVenda, idghs_vendas, idghs_vendedor, ghs_valorTotal);
         Util.habilitar(false, idghs_vendas, ghs_dataVenda, idghs_vendas, ghs_formaPagamento, ghs_statusVenda, idgbs_cliente, idghs_vendedor, ghs_valorTotal, jBtnConfirmar, jBtnCancelar, jBtnAlterar, jBtnExcluir, jBtnAlterar1, jBtnIncluir1, jBtbExcluir1);
         Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
@@ -482,7 +483,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         } else {
            ghsVendas_DAO.update(ghsVendas);
             GhsVendasProdutos_DAO ghsVendasProdutos_DAO = new GhsVendasProdutos_DAO();
-             GhsVendasProdutos ghsVendasProdutos;
+             GhsVendasProdutos ghsVendasProdutos;   ghsVendas_DAO.update(ghsVendas);
             for (int linha = 0; linha < jTable2.getRowCount(); linha++) {
                 ghsVendasProdutos = vendasProdutosControle.getBean(linha);
                 ghsVendasProdutos.setGhsVendas(ghsVendas);
@@ -497,7 +498,30 @@ public class JDlgVendas extends javax.swing.JDialog {
 
        // ghsVendas = null;
         
-        
+//       if (ghsVendas != null) {
+//    GhsVendasProdutos_DAO ghsVendasProdutos_DAO = new GhsVendasProdutos_DAO();
+
+//    for (int linha = 0; linha < jTable2.getRowCount(); linha++) {
+ //       ghsVendasProdutos = vendasProdutosControle.getBean(linha);
+ //       ghsVendasProdutos_DAO.delete(ghsVendasProdutos);
+ //   }
+
+//    ghsVendas = viewBean();
+
+//    if (incluindo) {
+ //       ghsVendas_DAO.insert(ghsVendas);
+//    } else {
+//        ghsVendas_DAO.update(ghsVendas);
+//    }
+    
+//    for (int linha = 0; linha < jTable2.getRowCount(); linha++) {
+ //       ghsVendasProdutos = vendasProdutosControle.getBean(linha);
+ //       ghsVendasProdutos.setGhsVendas(ghsVendas);
+//        ghsVendasProdutos_DAO.insert(ghsVendasProdutos);
+ //   }
+//} 
+
+         
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnIncluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluir1ActionPerformed

@@ -51,7 +51,8 @@ public class JDlgCliente extends javax.swing.JDialog {
              mascaraTel = new MaskFormatter("##-####-####");
              mascaraRg = new MaskFormatter("##.###.###-#");
              mascaraIdade = new MaskFormatter("##");
-             mascaraCel = new MaskFormatter("#####-###");
+             mascaraCel = new MaskFormatter("#####-####");
+             mascaraCep = new MaskFormatter("#####-###");
          } catch (ParseException ex) {
              Logger.getLogger(JDlgCliente.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -62,6 +63,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         gbs_rg.setFormatterFactory( new DefaultFormatterFactory(mascaraRg));
         gbs_idade.setFormatterFactory( new DefaultFormatterFactory(mascaraIdade));
         gbs_telefoneResidencial.setFormatterFactory( new DefaultFormatterFactory(mascaraTel));
+        ghs_cep.setFormatterFactory( new DefaultFormatterFactory(mascaraCep));
          
     }
         public GhsCliente viewBean(){
@@ -86,6 +88,8 @@ public class JDlgCliente extends javax.swing.JDialog {
          
          ghsCliente.setGbsRegiao(gbs_regiao.getText());
          
+         ghsCliente.setGhsCep(ghs_cep.getText());
+         
                  
       
         
@@ -108,6 +112,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         gbs_estado.setText(ghsCliente.getGbsEstado());
         gbs_idade.setText(Util.intStr(ghsCliente.getGbsIdade()));
         gbs_regiao.setText(ghsCliente.getGbsRegiao());
+        ghs_cep.setText(ghsCliente.getGhsCep());
         
        
         
@@ -464,6 +469,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         JDlgClientePesquisa jDlgClientePesquisa = new JDlgClientePesquisa(null, true);
         jDlgClientePesquisa.setTelaAnterior(this);
         jDlgClientePesquisa.setVisible(true);
+         Util.habilitar(true, jBtnAlterar, jBtnCancelar, jBtnExcluir, jBtnIncluir);
         
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 

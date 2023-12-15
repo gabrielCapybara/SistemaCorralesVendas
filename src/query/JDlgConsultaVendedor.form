@@ -63,6 +63,8 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="ghs_dataNascimento" min="-2" pref="142" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jBtnConsultar" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -83,6 +85,7 @@
                       <Component id="ghs_nome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBtnConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ghs_dataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
               </Group>
@@ -111,6 +114,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="ghs_dataNascimento">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="IGUAL"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

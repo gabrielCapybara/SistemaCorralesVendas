@@ -40,13 +40,14 @@ public class GhsCliente  implements java.io.Serializable {
      private String gbsEstado;
      private int gbsIdade;
      private String gbsRegiao;
+     private String ghsCep;
 
 
     public GhsCliente() {
     }
 
 	
-    public GhsCliente(int idgbsCliente, String ghsNome, String ghsCpf, String gbsRg, int gbsSexo, Date gbsDataNascimento, String gbsEmail, String gbsEndereco, String gbsBairro, String gbsCidade, String gbsCelular, String gbsEstado, int gbsIdade) {
+    public GhsCliente(int idgbsCliente, String ghsNome, String ghsCpf, String gbsRg, int gbsSexo, Date gbsDataNascimento, String gbsEmail, String gbsEndereco, String gbsBairro, String gbsCidade, String gbsCelular, String gbsEstado, int gbsIdade, String ghsCep) {
         this.idgbsCliente = idgbsCliente;
         this.ghsNome = ghsNome;
         this.ghsCpf = ghsCpf;
@@ -60,6 +61,7 @@ public class GhsCliente  implements java.io.Serializable {
         this.gbsCelular = gbsCelular;
         this.gbsEstado = gbsEstado;
         this.gbsIdade = gbsIdade;
+        this.ghsCep = ghsCep;
     }
    
      @Id 
@@ -214,6 +216,16 @@ public class GhsCliente  implements java.io.Serializable {
         this.gbsRegiao = gbsRegiao;
     }
 
+    @Column(name="ghs_cep", nullable=false, length=45)
+    public String getGhsCep() {
+        return this.ghsCep;
+    }
+    
+    public void setGhsCep(String ghsCep) {
+        this.ghsCep = ghsCep;
+    }
+    
+    
     @Override
     public String toString(){
         return getGhsNome();
